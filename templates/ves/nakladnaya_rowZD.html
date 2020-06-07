@@ -411,9 +411,12 @@ $(document).ready(function(){
 let auto_in = "{{ auto_in_J|escapejs }}";
 {#auto_in = auto_in.replace(/&quot;/g,'"');#}
 auto_in = JSON.parse(auto_in);
-    //=================================================================================================================================================
+    let global_status_replace_right =false;
+    //=================================
+    // ================================================================================================================
 //==================================================================================================================================================================================================
 function replaceRight(num){
+    global_status_replace_right=true;
     let actual =auto_in.find(obj => obj.number == num);
     console.log(actual);
     $("#p1ButtonClearForm").trigger('click');
@@ -467,8 +470,16 @@ function tableAutoIn(){
         function save(data) {
     if(!confirm("Вы увеерны что хотите соxранить данные")){return;}
     let url;
-    if(confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")){ url = "{%url 'newAddVagon'%}";}else{url = "{%url 'updNewTrain'%}";}
-        $.ajax({
+    if(global_status_replace_right) {
+        if (confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")) {
+            url = "{%url 'newAddVagon'%}";
+        } else {
+            url = "{%url 'updNewTrain'%}";
+        }
+    }else{
+          url = "{%url 'newAddVagon'%}";
+    }
+    $.ajax({
             type: "POST",
             url:  url ,
             traditional: true,
@@ -482,6 +493,7 @@ function tableAutoIn(){
                 $("#p3ButtonClearForm").trigger('click');
                 $("#p4ButtonClearForm").trigger('click');
                 tableAutoIn();
+                global_status_replace_right=false;
             },
             beforeSend: function (xhr, settings) {
                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {

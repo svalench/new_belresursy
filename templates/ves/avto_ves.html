@@ -149,9 +149,11 @@ const displayBlock = (blockId) => {
             $(blockId).animate({height: 'hide'}, 300);
         }
 };
+let global_status_replace_right=false;
 //=================================================================================================================================================
 //==================================================================================================================================================================================================
 function replaceRight(num){
+    global_status_replace_right=true;
     let actual =auto_in.find(obj => obj.number == num);
     console.log(actual);
     $("#p1ButtonClearForm").trigger('click');

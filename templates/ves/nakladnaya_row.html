@@ -451,10 +451,19 @@
 
 
     function save(data) {
+
     if(!confirm("Вы увеерны что хотите соxранить данные")){return;}
     let url;
-    if(confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")){ url = "{%url 'newAddAuto'%}";}else{url = "{%url 'updNewAuto'%}";}
-        $.ajax({
+     if(global_status_replace_right) {
+         if (confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")) {
+             url = "{%url 'newAddAuto'%}";
+         } else {
+             url = "{%url 'updNewAuto'%}";
+         }
+     }else{
+         url = "{%url 'newAddAuto'%}";
+     }
+    $.ajax({
             type: "POST",
             url:  url ,
             traditional: true,
@@ -468,6 +477,7 @@
                 $("#p3ButtonClearForm").trigger('click');
                 $("#p4ButtonClearForm").trigger('click');
                 tableAutoIn();
+                global_status_replace_right=false;
             },
             beforeSend: function (xhr, settings) {
                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {

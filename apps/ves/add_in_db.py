@@ -123,6 +123,14 @@ def addAutoNew(request):
             form['NumberWayList'] = None
         if (not 'NumberAccompanyingPassport' in form):
             form['NumberAccompanyingPassport'] = None
+        autoInDB = CatalogAuto.objects.filter(number=form['gos_num_avto'])
+        if not autoInDB.exists():
+            if(in_ter[0].weghtIn<int(form['ves'])):
+                tara = in_ter[0].weghtIn
+            else:
+                tara = int(form['ves'])
+            newDBauto = CatalogAuto(number = form['gos_num_avto'],agent_id = form['Contragent'], tara = tara)
+            newDBauto.save()
         #in_ter.update(last_out=last_in,weghtOut=form['ves'],status_in=False,netto=abs(in_ter[0].weghtIn-int(form['ves'])))
         in_ter.update(netto=abs(in_ter[0].weghtIn-int(form['ves'])), agents_id=form['Contragent'], driver=form['NameDriver'], parentcontractid_id=form['Contract'],
                     number_pricep=form['gos_num_pricep'],  last_out=last_in, catalog_id=form['DataAuto'], catalogpricep=form['DataTrailer'],
