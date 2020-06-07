@@ -556,10 +556,11 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="row pb-1">
-                            <div class="col-2"><label>№ Акта<br /></label><input type="text" id="actNumberAct" name="actNumberAct" class="form-control" /></div>
-                            <div class="col-3"><label>Дата приемки от </label><input id="actCurrentDateTime" class="form-control" type="datetime-local" /></div>
+                            <input id ="numberAuto" name="numberAuto" hidden>
+                            <div class="col-2"><label>№ Акта<br /></label><input required type="text" id="actNumberAct" name="actNumberAct" class="form-control" /></div>
+                            <div class="col-3"><label>Дата приемки от </label><input required id="actCurrentDateTime" class="form-control" type="datetime-local" /></div>
                             <div class="col-2"><label>Ед.изм.</label><input type="text" id="actUnitWeight" class="form-control" value="кг" list="listUnitWeight" /></div>
-                            <div class="col-3"><label>Дата отгрузки</label><input id="actDateOut" name="actDateOut" class="form-control" type="date" /></div>
+                            <div class="col-3"><label>Дата отгрузки</label><input id="actDateOut" required name="actDateOut" class="form-control" type="date" /></div>
                         </div>
                         <input type="date" name="datecontract" id="datecontract" hidden>
                         <div class="row pb-1">
@@ -573,8 +574,8 @@
                         <div class="row pb-1">
                             <div class="col-2"><label>Тип накладной</label><input type="text" id="actViewTmc" name="actViewTmc" class="form-control" list="listTypeInvoice" value="ТЖН" /></div>
                             <div class="col-3"><label>Номер накладной</label><input type="number"  id="actNumberInvoice" name="actNumberInvoice" class="form-control" min="0" /></div>
-                            <div class="col-3"><label>Дата накладной</label><input id="actDateInvoice" name="actDateInvoice" class="form-control" type="date" /></div>
-                            <div class="col-3"><label>Дата поступления </label><input id="actDateIn" name="actDateIn" class="form-control" type="date" /></div>
+                            <div class="col-3"><label>Дата накладной</label><input required id="actDateInvoice" name="actDateInvoice" class="form-control" type="date" /></div>
+                            <div class="col-3"><label>Дата поступления </label><input required id="actDateIn" name="actDateIn" class="form-control" type="date" /></div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -598,7 +599,7 @@
                         <div class="row pb-1">
                             <div class="col-3"><label>Вес недосдачи</label><input type="number" id="actNotWeight" name="actNotWeight" class="form-control" min="0" readonly /></div>
                             <div class="col-3"><label>Зачетный вес </label><input type="number" id="actOkWeight" name="actOkWeight" class="form-control" min="0" readonly /></div>
-                            <div class="col-4"><label>Дата совместной приемки</label><input id="actDateCommonComming" name="actDateCommonComming" class="form-control" type="datetime-local" /></div>
+                            <div class="col-4"><label>Дата совместной приемки</label><input required id="actDateCommonComming" name="actDateCommonComming" class="form-control" type="datetime-local" /></div>
                         </div>
                     </div>
                 </div>
@@ -1353,12 +1354,14 @@ function getNumberSelect(k){
 
 $("#modalWord").click(function(e){
     $("#actAddressContragent").val(actual.address);
+    $("#actNumberAct").val(actual.actNumber);
     $("#actContragent").val(actual.nameagent);
     $("#actContract").val(actual.contractname);
     $("#actWeightInvoice").val(actual.ves_nakladnaya);
     $("#actUnitWeight").val(actual.ves_ed);
     $("#datecontract").val(actual.datecontract);
     $("#actNameAuto").val(actual.number);
+    $("#numberAuto").val(actual.number);
    $("#actDateInvoice").val(actual.nakladnayaDate);
     $("#actPercentDirt").val(actual.discont);
     $("#actNumberInvoice").val(actual.numberNakladnaia);
@@ -1374,6 +1377,8 @@ $("#modalWord").click(function(e){
     }
     $("#actFullWeight").val(gruz);
     $("#actEmptyWeight").val(tara);
+    $("#actDateCommonComming").val(actual.datepriemsovmestny);
+    $("#actDateOut").val(actual.dateotgruzka);
     $("#actLoginUserProf").val(actual.role);
     $("#actLoginUserName").val(actual.name+" "+actual.secondName+" "+ actual.lastName);
 

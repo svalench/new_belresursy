@@ -1,13 +1,25 @@
 from datetime import datetime
 
 from django.http import HttpResponse
-
+from apps.ves.models import Auto, ActionUser, Agent, Vagon
 from apps.ves.docGenerator import redactDocx
 
 
 def actGenerate(request):
     form = request.POST
+    form._mutable = True
     print(form)
+    auto = Auto.objects.filter(number=form['numberAuto'])
+    print(auto)
+    if 'actCurrentDateTime' in form:
+        form['actCurrentDateTime'] = None
+    if 'actDateCommonComming' in form:
+        form['actDateCommonComming'] = None
+    if 'actDateOut' in form:
+        form['actDateOut'] = None
+    auto.update(actNumber=form['actNumberAct'],
+                datepriemsovmestny=form['actDateCommonComming'], dateotgruzka=form['actDateOut'])
+
     date = form['actDateCommonComming'].split("T")
     data =date[0]
     vremia = date[1]
@@ -35,6 +47,15 @@ def actGenerate(request):
         'weediness': form['actPercentDirt'],
         'load_weight': form['actOkWeight']
     }
+    auto = Auto.objects.filter(number = form['numberAuto'])
+    print(auto)
+    if 'actCurrentDateTime' in form:
+        form['actCurrentDateTime']=None
+    if 'actDateCommonComming' in form:
+        form['actDateCommonComming']=None
+    if 'actDateOut' in form:
+        form['actDateOut']=None
+    auto.update(actNumber=form['actNumberAct'] ,datepriem = form['actCurrentDateTime'], datepriemsovmestny=form['actDateCommonComming'], dateotgruzka=form['actDateOut'])
     now = datetime.now()
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
