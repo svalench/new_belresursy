@@ -264,7 +264,7 @@ const clearFieldModalAdd = () => {
     function addAuto() {
         let findIdContragent=$('#contragent').val();
 
-        let agent = $('option[value='+findIdContragent+']').attr("id");
+        let agent = $("option[value='"+findIdContragent+"']").attr("id");
         let number = $('#number').val();
         let model = $("#model").val();
         let ves = $("#tara").val();
@@ -300,7 +300,7 @@ const clearFieldModalAdd = () => {
         let findIdContragent=$('#contragent_upd').val();
 
         let id = $("#auto_id").val();
-        let agent = $('option[value='+findIdContragent+']').attr("id");
+        let agent = $("option[value='"+findIdContragent+"']").attr("id");
         let number = $('#number_upd').val();
         let model = $("#model_upd").val();
         let ves = $("#tara_upd").val();
