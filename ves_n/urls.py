@@ -22,6 +22,7 @@ from apps.ves.detectNumber import detectNumber
 from apps.ves.production import showProduction, AddProduction, UpdProduction, deleteProduction
 from apps.ves.responseblePerson import showPerson, AddPerson, UpdPerson, deletePerson
 from apps.ves.trailer import showTrailer, UpdTrailer, AddTrailer, deleteTrailer
+from apps.ves.addUser import  UpdUser, AddUserNew, deleteUser
 from ves_n.views import *
 
 from channels.routing import ProtocolTypeRouter
@@ -63,6 +64,10 @@ urlpatterns = [
     path('data/catalogContractUpd',UpdContract,name='catalogcontractUpd'),
     path('data/catalogContractDel', deleteContract, name='catalogcontractDel'),
 
+    # users
+    path('data/add/user/new',AddUserNew,name='addUser'),
+    path('data/update/user/new',UpdUser,name='updUser'),
+    path('data/delete/user/',deleteUser,name='deleteUser'),
     # прицепы
     path('data/trailerShow',showTrailer,name='trailerShow'),
     path('data/trailerAdd',AddTrailer,name='trailerAdd'),

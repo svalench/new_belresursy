@@ -37,7 +37,7 @@
               <input type="text" class="form-control" hidden>
               <label></label>
             </div>
-
+            <form id="adduserform">
 
               <div class="md-form mb-5">
                 <input type="text" id="userNickname" class="form-control">
@@ -90,7 +90,7 @@
                 <input type="text" id="userDescription" class="form-control">
                 <label data-error="измените" data-success="принято" for="userDescription">Доп. информация</label>
             </div>
-
+            </form>
 
           </div>
           <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
@@ -207,7 +207,7 @@
 
           </div>
           <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-            <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal" onclick="">Да</button>
+            <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal" onclick="deleteUser()">Да</button>
             <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">Нет</button>
           </div>
         </div>
@@ -231,24 +231,21 @@
         <th class="th-sm">Фамилия</th>
         <th class="th-sm">Должность</th>
         <th class="th-sm">Роль</th>
-
-        <th class="th-sm">Телефон</th>
 	  <th class="th-sm">Доп. информация</th>
 
     </tr>
   </thead>
   <tbody>
-  {% for a in page_obj %}
-    <tr>
+  {% for a in all %}
+    <tr onclick="getId({{ a.id }})">
      <td>{{ a.id }}</td>
-      <td>{{ a.username }}</td>
+      <td>{{ a.name }}</td>
         <td>*</td>
-        <td>{{ a.name }}</td>
-        <td>{{ a.otchestvo }}</td>
-        <td>{{ a.familia }}</td>
-      <td>{{ a.professia }}</td>
-         <td>{{ a.role }}</td>
-        <td>{{ a.phone }}</td>
+        <td>{{ a.first_name }}</td>
+        <td>{{ a.secondName }}</td>
+        <td>{{ a.lastName }}</td>
+      <td>{{ a.role }}</td>
+         <td>{{ a.user_role }}</td>
        <td>{{ a.description }}</td>
     </tr>
   {% endfor %}
@@ -265,7 +262,6 @@
         <th>Фамилия</th>
         <th>Должность</th>
         <th>Роль</th>
-        <th>Телефон</th>
 	   <th>Доп. информация</th>
 			</tr>
       </tfoot>
@@ -400,6 +396,88 @@
 $(document).ready ( function(){
  preventSelection(document);
 });
+
+
+    function addUser(){
+
+        let data = {
+          "ferst_name": $("#userName").val(),
+          "second_name": $("#userOtchestvo").val(),
+            "last_name":$("#userFamilia").val(),
+            "nikname":$("#userNickname").val(),
+            "pass":$("#userPassword1").val(),
+            "role":$("#userProfessia").val(),
+            "access":$("#userAccess").val(),
+        };
+        console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'addUser' %}",
+                data: data,
+                success: function () {
+                    console.log('Load was performed.');
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+    }
+
+    let super_id;
+    function getId(id){
+        super_id=id;
+    }
+        function updUser(){
+
+        let data = {
+            'id':super_id,
+          "ferst_name": $("#userNameUpd").val(),
+          "second_name": $("#userOtchestvoUpd").val(),
+            "last_name":$("#userFamiliaUpd").val(),
+            "nikname":$("#userNicknameUpd").val(),
+            "pass":$("#userPassword1Upd").val(),
+            "role":$("#userProfessiaUpd").val(),
+            "access":$("#userAccessUpd").val(),
+        };
+        console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'updUser' %}",
+                data: data,
+                success: function () {
+                    console.log('Load was performed.');
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+    }
+
+     function deleteUser(){
+
+        let data = {
+            'id':super_id,
+             };
+        console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'deleteUser' %}",
+                data: data,
+                success: function () {
+                    console.log('Load was performed.');
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+    }
+
     </script>
 
 {% endblock %}

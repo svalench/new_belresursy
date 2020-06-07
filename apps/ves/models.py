@@ -16,6 +16,7 @@ class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     descriptions = models.TextField('описание', max_length=500, blank=True)
     name = models.CharField("имя", max_length=60, blank=True)
+    first_name = models.CharField("имя", max_length=60, blank=True)
     secondName = models.CharField("отчество", max_length=60, blank=True)
     lastName = models.CharField("фамилия", max_length=60, blank=True)
     role = models.CharField("должность", max_length=100, null=True, blank=True)

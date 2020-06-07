@@ -180,7 +180,7 @@ class DataView(LoginRequiredMixin, CreateView):
                 print('Please correct the error below.')
         print("======")
         #print(users[5].profile.descriptions)
-        data = {'page_obj': page_obj, "users": agent_json,"roles":USER_ROLES_SETTINGS,"userform":user_form}
+        data = {'page_obj': page_obj,"all":users ,"users": agent_json,"roles":USER_ROLES_SETTINGS,"userform":user_form}
         return render(request, 'data/user_view.html', data)
 
     @login_required
