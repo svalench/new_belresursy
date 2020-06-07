@@ -464,18 +464,20 @@ function tableAutoIn(){
 
 
 
-    function save(data) {
-
+        function save(data) {
+    if(!confirm("Вы увеерны что хотите соxранить данные")){return;}
+    let url;
+    if(confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")){ url = "{%url 'newAddVagon'%}";}else{url = "{%url 'updNewTrain'%}";}
         $.ajax({
             type: "POST",
-            url: "{% url 'newAddVagon' %}",
+            url:  url ,
             traditional: true,
             dataType: 'json',
             data: data,
             success: function (ret) {
-                 auto_in = ret.all;
-                console.log('Auto Add in DB');
-                 $("#p1ButtonClearForm").trigger('click');
+                auto_in = ret.all;
+                console.log(ret);
+                $("#p1ButtonClearForm").trigger('click');
                 $("#p2ButtonClearForm").trigger('click');
                 $("#p3ButtonClearForm").trigger('click');
                 $("#p4ButtonClearForm").trigger('click');
@@ -490,6 +492,9 @@ function tableAutoIn(){
 
 
     }
+
+
+
     let typeoperation_in_window = 1;
     function show_serchAgent(a,agent) {
         typeoperation_in_window=a;

@@ -451,10 +451,12 @@
 
 
     function save(data) {
-
+    if(!confirm("Вы увеерны что хотите соxранить данные")){return;}
+    let url;
+    if(confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")){ url = "{%url 'newAddAuto'%}";}else{url = "{%url 'updNewAuto'%}";}
         $.ajax({
             type: "POST",
-            url: "{% url 'newAddAuto' %}",
+            url:  url ,
             traditional: true,
             dataType: 'json',
             data: data,

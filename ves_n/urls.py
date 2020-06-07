@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from apps.ves.add_in_db import addAutoNew, addVagonNew
+from apps.ves.add_in_db import addAutoNew, addVagonNew,updateAutoNew, updateTrainNew
 from apps.ves.contract import showContract, AddContract, UpdContract, deleteContract
 from apps.ves.detectNumber import detectNumber
 from apps.ves.production import showProduction, AddProduction, UpdProduction, deleteProduction
@@ -55,7 +55,9 @@ urlpatterns = [
     path('onoff/svet1/',onOffS1,name='on1'),
     path('onoff/zd/svet1/',onOffZd,name='onoffzd'),
     path('add/auto/new',addAutoNew,name='newAddAuto'),
+    path('upd/auto/data/new',updateAutoNew,name='updNewAuto'),
     path('add/train/new',addVagonNew,name='newAddVagon'),
+    path('upd/train/data/new', updateTrainNew, name='updNewTrain'),
     path('detect/auto/number', detectNumber, name='detectNumber'),
 
     #данные бд контрагент
