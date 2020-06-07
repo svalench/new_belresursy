@@ -9,7 +9,7 @@ def actGenerate(request):
     form = request.POST
     form._mutable = True
     print(form)
-    auto = Auto.objects.filter(number=form['numberAuto'])
+    auto = Auto.objects.filter(number=form['numberAuto'],netto=form['actFactWeight'])
     print(auto)
     if 'actCurrentDateTime' in form:
         form['actCurrentDateTime'] = None

@@ -1349,7 +1349,7 @@ function getNumberSelect(k){
 
 
 
-        let agents = "{{ Jagents }}";
+        let agents = "{{ Jagents|escapejs }}";
         agents = agents.replace(/&quot;/g, '"');
         agents = JSON.parse(agents);
         let agent = [];
@@ -1373,6 +1373,8 @@ $("#modalWord").click(function(e){
     $("#actWeightInvoice").val(actual.ves_nakladnaya);
     $("#actUnitWeight").val(actual.ves_ed);
     $("#datecontract").val(actual.datecontract);
+    let ms = actual.last_in.split(" ");
+    $("#actDateIn").val(ms[0]);
     $("#actNameAuto").val(actual.number);
     $("#numberAuto").val(actual.number);
    $("#actDateInvoice").val(actual.nakladnayaDate);
@@ -1410,6 +1412,7 @@ alert(actual.seria);
     $("#p"+super_num+"CellNumberAuto").html(actual.number);
     $("#gos_num_pricep").val(actual.numberPricep);
     $("#p"+super_num+"SeriesInvoice").val(actual.seria);
+
     $("#p"+super_num+"Contragent").val(actual.nameagent);
     $("#p"+super_num+"DateInvoice").val(actual.nakladnayaDate);
     $("#p"+super_num+"NumberInvoice").val(actual.numberNakladnaia);
@@ -1440,7 +1443,6 @@ alert(actual.seria);
 }
 
 function transferDataToModalAkt(num){
-    alert(num);
     let gruz,tara;
     if(actual.weghtIn>actual.weghtOut){
          tara = actual.weghtOut;
@@ -1453,6 +1455,7 @@ function transferDataToModalAkt(num){
   document.getElementById("t"+num+"CurrentDate").valueAsDate = new Date();
     $("#t"+num+"CellNumberAuto").html(actual.number);
     $("#gos_num_pricep").val(actual.numberPricep);
+    $("#t"+num+"CellPhysicalWeight").html(actual.netto);
     $("#t"+num+"SeriesInvoice").val(actual.seria);
     $("#t"+num+"Contragent").val(actual.nameagent);
     $("#t"+num+"DateInvoice").val(actual.nakladnayaDate);
@@ -1811,6 +1814,7 @@ const transferFieldOpenModalInvoiceT2 = () =>{
     $(iN+"CellSumNds").text(sumNds);
     $(iN+"CellSumWithNds").text(sumWithNds);
     transferDataToModalAkt(2);
+    transferDataToModal(2);
 }
     </script>
 
@@ -1818,6 +1822,7 @@ const transferFieldOpenModalInvoiceT2 = () =>{
     <script>
     $(".t3Calculation").bind("change paste keyup", function() {
           transferDataToModalAkt(this.id[1]);
+          transferDataToModal(this.id[1]);
     let iN = "#t" + this.id[1]
     $(iN+"CellNameTmc").text($(iN+"NameTmc").val());
     $(iN+"CellUnitWeight").text($(iN+"UnitWeight").val());
