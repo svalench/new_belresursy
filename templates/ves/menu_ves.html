@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <link rel="stylesheet" href="{% static 'boostrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Features-Boxed.css' %}">
+    <script src="{% static 'boostrap/js/bootstrap.min.js' %}"></script>
+  <!-- Start: Features Boxed -->
+    <div class="features-boxed" style="background-color: rgb(255,255,255);">
+        <div class="container">
+            <!-- Start: Features -->
+            <div class="row justify-content-center features" style="padding-bottom: 0px;">
+                <div onclick="gotoavto()" class="col-sm-12 col-md-6 col-lg-6 col-xl-6 item">
+                    <div class="box" style="padding: 20px;"><img src="{% static 'img/img/car_weight.svg'%}" style="width: 260px;">
+                        <h3 class="name">Автотранспорт - весовой контроль</h3>
+                        <p class="description">Управление пунктом весового контроля</p><span id="statusAuto" class="bg-success border rounded" style="font-size: 24px;padding: 5px;">СВОБОДЕН</span></div>
+                </div>
+                <div onclick="gotozd()" class="col-sm-12 col-md-6 col-lg-6 col-xl-6 item">
+                    <div class="box" style="padding: 20px;"><img src="{% static 'img/img/train_weight.svg'%}" style="width: 260px;">
+                        <h3 class="name">Ж/Д транспорт- весовой контроль</h3>
+                        <p class="description">Управление пунктом весового контроля</p><span id="statusZd" class="bg-danger border rounded" style="font-size: 24px;padding: 5px;">ЗАНЯТ</span></div>
+                </div>
+                <div onclick="gotoavtoData()" class="col-sm-12 col-md-6 col-lg-6 col-xl-6 item">
+                    <div class="box" style="padding: 20px;"><img src="{% static 'img/img/car_data.svg'%}" style="width: 260px;">
+                        <h3 class="name">Автотранспорт - сводные данные</h3>
+                        <p class="description">Просмотр данных в табличном виде</p>
+                    </div>
+                </div>
+                <div onclick="gotozdData()" class="col-sm-12 col-md-6 col-lg-6 col-xl-6 item">
+                    <div class="box" style="padding: 20px;"><img src="{% static 'img/img/train_data.svg'%}" style="width: 260px;">
+                        <h3 class="name">Ж/Д транспорт - сводные данные</h3>
+                        <p class="description">Просмотр данных в табличном виде</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End: Features -->
+        </div>
+    </div>
+    <!-- End: Features Boxed -->
+    <script>
+function gotoavto() {
+    window.location.href = "/ves/avto";
+}
+function gotoavtoData() {
+    window.location.href = "/ves/avtodata";
+}
+function gotozd() {
+    window.location.href = "/ves/zd";
+}
+function gotozdData() {
+    window.location.href = "/ves/zddata";
+}
+function statusUpd(){
+    if(!statusGlobalJs.auto){
+        $("#statusAuto").removeClass('bg-danger');
+        $("#statusAuto").addClass('bg-success');
+        $("#statusAuto").html('СВОБОДЕН');
+    }else{
+        $("#statusAuto").removeClass('bg-success');
+        $("#statusAuto").addClass('bg-danger');
+        $("#statusAuto").html('ЗАНЯТ');
+    }
+    if(!statusGlobalJs.zd){
+        $("#statusZd").removeClass('bg-danger');
+        $("#statusZd").addClass('bg-success');
+        $("#statusZd").html('СВОБОДЕН');
+    }else{
+        $("#statusZd").removeClass('bg-success');
+        $("#statusZd").addClass('bg-danger');
+        $("#statusZd").html('ЗАНЯТ');
+    }
+}
+
+setInterval(statusUpd,1000);
+    </script>
+
+{% endblock %}

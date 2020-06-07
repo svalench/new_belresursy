@@ -1,0 +1,641 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+
+{% block title %}
+    Автотранспорт
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="body" class="container-fluid" style="text-align: center;">
+        <input type="checkbox" id="hmt" class="hidden-menu-ticker">
+
+        <label class="btn-menu" for="hmt">
+            Авто на территории
+        </label>
+        <div class="hidden-menu" style="overflow: auto;">
+
+ <div class="table-bordered">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>№ Авто</th>
+                <th>Операция</th>
+                <th>Контрагент</th>
+                <th>Материал</th>
+                <th>Время въезда<br /></th>
+            </tr>
+        </thead>
+        <tbody id="auti_in">
+            <tr>
+                <td>Cell 1</td>
+                <td>Cell 1</td>
+                <td>Cell 2</td>
+                <td>Cell 3</td>
+                <td>Cell 3</td>
+                <td><button class="btn btn-primary btM" onclick="replaceRight()" type="button">------></button></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+        </div>
+</div>
+
+
+{% include  'ves/ves_row.html' %}
+{% include 'ves/nakladnaya_row.html' %}
+{% include 'ves/svet_row.html' %}
+{% include 'ves/cam_row.html' %}
+
+
+
+    <!-- Modal change GosNomAvto -->
+    <div class="modal fade" id="gosnomeravto" tabindex="-1" role="dialog" aria-labelledby="gosnomeravto"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Измение номера авто</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    <div class="col"><label for="gosNavto">Номер авто</label><input type="text" class="form-control" id="gosNavto" pattern="([0-9]{4})" maxlength="4" /></div>
+                    <div class="col"><label for="seriaAvto">Серия</label><input type="text" class="form-control" id="seriaAvto" pattern="([a-zA-Z]{2})" maxlength="2" /></div>
+                    <div class="col"><label for="regionAvto">Регион</label><input type="text" class="form-control" id="regionAvto" pattern="([0-7]$)" maxlength="1" /></div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+{#                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Отмена</button>#}
+                    <button type="button" onclick="changeNumAvto()" class="btn btn-primary">Изменить номер</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- Modal change GosNomAvtoPricep -->
+    <div class="modal fade" id="gosnomerpricep" tabindex="-1" role="dialog" aria-labelledby="gosnomerpricep"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Измение номера прицепа</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    <div class="col"><label for="gosNpricep">Номер прицепа</label><input type="text" class="form-control" id="gosNpricep" pattern="([0-9]{4})" maxlength="4" /></div>
+                    <div class="col"><label for="seriaPricep">Серия</label><input type="text" class="form-control" id="seriaPricep" pattern="([a-zA-Z]{2})" maxlength="2" /></div>
+                    <div class="col"><label for="regionPricep">Регион</label><input type="text" class="form-control" id="regionPricep" pattern="([0-7]$)" maxlength="1" /></div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+{#                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Отмена</button>#}
+                    <button type="button" onclick="changeNumPricep()" class="btn btn-primary">Изменить номер</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {% csrf_token %}
+{#Visible block nakladnay, camera, svetofor#}
+<script>
+$("#clickDataNakladnaya").click(function(){
+   displayBlock("#DanniePoTransporty");
+});
+
+
+        $('#gosnomeravto').on('hidden.bs.modal', function (e) {
+
+            pricep = false;
+        })
+
+
+
+$("#clickDataSvet").click(function(){
+   displayBlock("#svetControl");
+});
+
+$("#clickDataCamera").click(function(){
+   displayBlock("#cameraControl");
+});
+
+const displayBlock = (blockId) => {
+    if ($(blockId).css('display') == 'none')
+        {
+            $(blockId).animate({height: 'show'}, 300);
+        }
+    else
+        {
+            $(blockId).animate({height: 'hide'}, 300);
+        }
+};
+//=================================================================================================================================================
+//==================================================================================================================================================================================================
+function replaceRight(num){
+    let actual =auto_in.find(obj => obj.number == num);
+    console.log(actual);
+    $("#p1ButtonClearForm").trigger('click');
+                $("#p2ButtonClearForm").trigger('click');
+                $("#p3ButtonClearForm").trigger('click');
+                $("#p4ButtonClearForm").trigger('click');
+    chooseTabs(actual.operatrion);
+    $("#gos_num_avto").val(actual.number);
+    $("#gos_num_pricep").val(actual.numberPricep);
+    $("#p"+actual.operatrion+"Contragent").val(actual.nameagent);
+    $("#p"+actual.operatrion+"Contragent").attr('data-id',actual.agents_id);
+    $("#p"+actual.operatrion+"DateInvoice").val(actual.nakladnayaDate);
+    $("#p"+actual.operatrion+"SeriesInvoice").val(actual.seria);
+    $("#p"+actual.operatrion+"NumberInvoice").val(actual.numberNakladnaia);
+    $("#p"+actual.operatrion+"NameDriver").val(actual.driver);
+    $("#p"+actual.operatrion+"Description").val(actual.description);
+    $("#p"+actual.operatrion+"Contract").val(actual.contractname);
+    $("#p"+actual.operatrion+"Contract").attr('data-id',actual.contractid);
+    $("#p"+actual.operatrion+"TypeInvoice").val();
+    $("#p"+actual.operatrion+"UnitContractPrice").val(actual.unitPrice);
+    $("#p"+actual.operatrion+"ContractPrice").val(actual.firstPrice);
+    $("#p"+actual.operatrion+"NdsPercent").val(actual.nds);
+    $("#p"+actual.operatrion+"WeightInvoice").val(actual.ves_nakladnaya);
+    $("#p"+actual.operatrion+"DirtPercent").val(actual.discont);
+    $("#p"+actual.operatrion+"TypeInvoice").val(actual.type);
+    $("#p"+actual.operatrion+"TypeArrival").val(actual.typeOperation);
+    $("#p"+actual.operatrion+"TypeMaterialOut").val(actual.typeMaterial);
+    $("#p"+actual.operatrion+"NumberAccompanyingPassport").val(actual.numberPasport);
+    $("#p"+actual.operatrion+"NumberWayList").val(actual.numberPassportList);
+    $(".btn-menu").trigger('click');
+}
+
+
+</script>
+{#check Field#}
+    <script>
+        const arrayInputId=["name_driver","data_auto","data_pricep","Nputev","pogruzka","razgruzka","agent","agentPoluchit","razreshil","osnovanie","prinal","sdal","gruzopoluchatel","doverennost","ttn","seria","nakladnaya","dateNakladnaya","name_tovar","ves_nakladnaya","ed_ves","cena","valuta","price_no_nds","nds","summ_nds","cena_nds","kol_mest","mass_gruza","description"];
+        const arrayLabelTrue=["Водитель","Автомобиль","Прицеп","№ путевого листа","Пункт погрузки","Пункт разгрузки","Грузоотправитель","Грузополучатель","Отпуск разрешил","Основание отпуска","Товар к доставке принял","Сдал грузоотправитель","Принял грузопучатель","Доверенность","Тип накладной","Серия накладной","Номер накладной","Дата накладной","Наименование товара","Количество","Ед","Цена","Валюта","Стоимость","Ставка НДС","Сумма НДС","Стоимость с НДС","Количествово мест","Масса груза","Описание"]
+        const arrayLabelFalse=["Водитель: Фамилия И.О.","Автомобиль","Прицеп","№ путевого листа","Пункт погрузки","Пункт разгрузки","Грузоотправитель","Грузополучатель","Отпуск разрешил","Основание отпуска","Товар к доставке принял","Сдал грузоотправитель","Принял грузопучатель","Доверенность","Тип накладной","Серия накладной","Номер накладной","Дата накладной","Наименование товара","Количество","Ед","Цена","Валюта","Стоимость","Ставка НДС","Сумма НДС","Стоимость с НДС","Количествово мест","Масса груза","Описание"]
+
+$("#name_driver").change(function(e) {
+   let regexp = /^[А-Яа-я\s.]+$/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#data_auto").change(function(e) {
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldEmpty(this,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#Nputev").change(function(e) {
+    let regexp = /^[0-9]+$/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#seria").change(function(e) {
+   let regexp = /^[A-Z]{2}/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#nakladnaya").change(function(e) {
+    let regexp = /^[0-9]+$/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#ves_nakladnaya").change(function(e) {
+    let regexp = /^[0-9]+$/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+$("#cena").change(function(e) {
+    let regexp = /^[0-9]+$/i;
+    let lT=arrayLabelTrue[arrayInputId.indexOf(this.id)];
+    let lF=arrayLabelFalse[arrayInputId.indexOf(this.id)];
+    checkFieldRegexp(this,regexp,e);
+    changeLabel(this,$("label[for="+this.id+"]"),lT,lF)
+});
+
+    const checkFieldEmpty = (id,e) => {
+    red = $(this).hasClass("border-danger");
+    green = $(this).hasClass("border-success")
+    if($(id).val() ==='' || $(id).val() ===0 || $(id).val() ===false) {
+       e.preventDefault();
+       if ((green==true) || (green==false && red==false)){
+           $(id).removeClass("border-success");
+            $(id).addClass("border-danger");
+       };
+   } else {
+       if ((red==true) || (green==false && red==false)){
+           $(id).removeClass("border-danger");
+            $(id).addClass("border-success");
+       };
+   }
+};
+
+const checkFieldRegexp = (id, regexp,e) => {
+    red = $(this).hasClass("border-danger");
+    green = $(this).hasClass("border-success")
+    if(!regexp.test($(id).val())) {
+       e.preventDefault();
+       if ((green==true) || (green==false && red==false)){
+           $(id).removeClass("border-success");
+            $(id).addClass("border-danger");
+       };
+   } else {
+       if ((red==true) || (green==false && red==false)){
+           $(id).removeClass("border-danger");
+            $(id).addClass("border-success");
+       };
+   }
+};
+
+const changeLabel = (idInput,idLabel,labelTextTrue,labelTextFalse) =>{
+    red = $(idInput).hasClass("border-danger");
+    green = $(idInput).hasClass("border-success")
+    if (green==true){
+           $(idLabel).text(labelTextTrue);
+           $(idLabel).css("color","#212529");
+
+   } else {
+       $(idLabel).text(labelTextFalse);
+       $(idLabel).css("color","#dc3545");
+       }
+   };
+
+
+
+const clearFields = () => {
+    arrayInputId.forEach(function(item,i){
+        $("#"+item+"").val('').removeClass("border-success").removeClass("border-danger");
+        $("label[for="+item+"]").text(arrayLabelTrue[i]).css("color","#212529");
+        // console.log(item+" - "+arrayLabelTrue[i])
+    });
+    $("#ttn").val('1');
+    $("#ed_ves").val('1');
+    $("#valuta").val('1');
+    $("#nds").val('20');
+    // alert('done');
+};
+
+    </script>
+
+
+
+    <script>
+        // using jQuery
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+        var pricep = false;
+        var count = 1;
+        var rowsTable = [];
+        var Table = [];
+        var urlAjaxAdd= '';
+
+        let agents = "{{ agentsJ }}";
+            agents = agents.replace(/&quot;/g,'"');
+            agents = JSON.parse(agents);
+        let tovar = "{{ production }}";
+            tovar = tovar.replace(/&quot;/g,'"');
+            tovar = JSON.parse(tovar);
+        let catalogAuto = "{{ catalog }}";
+            catalogAuto = catalogAuto.replace(/&quot;/g,'"');
+            catalogAuto = JSON.parse(catalogAuto);
+        let newAgents =[];
+            agents.forEach(function(a){
+            newAgents.push(a.fields);
+    });
+        var filterInt = function (value) {
+            if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+                return Number(value);
+            return false;
+        }
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        function addAction(action) {
+            let data = "where=auto&action=" + action + "&user={{ request.user.id }}";
+            $.ajax({
+                type: "POST",
+                url: '{% url 'addaction' %}',
+                data: data,
+                success: function () {
+                    console.log('Load was performed.');
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        }
+
+
+
+
+let status1=false;
+
+
+
+
+
+
+
+
+var fieldO= $('#otpravitel').find('option');
+// собственно поиск
+$('#searchingOtpr').bind('keyup', function() {
+    var q = new RegExp($(this).val(), 'ig'),
+        bol = true;
+if($('#searchingOtpr').val().length==0){
+    $('#otpravitel').css('display','none');
+}else{
+    $('#otpravitel').css('display','block');
+}
+    for (var i = 0, l = fieldO.length; i < l; i += 1) {
+        var option = $(fieldO[i]);
+        if ($(fieldO[i]).text().match(q)) {
+                option.show();
+        } else {
+            if (option.is('option') ) {
+                option.hide() }
+        } }
+});
+
+
+var fieldP= $('#poluchatel').find('option');
+// собственно поиск
+$('#searchingPol').bind('keyup', function() {
+    var q = new RegExp($(this).val(), 'ig'),
+        bol = true;
+if($('#searchingPol').val().length==0){
+    $('#otpravitel').css('display','none');
+}else{
+    $('#otpravitel').css('display','block');
+}
+    for (var i = 0, l = fieldP.length; i < l; i += 1) {
+        var option = $(fieldP[i]);
+        if ($(fieldP[i]).text().match(q)) {
+                option.show();
+        } else {
+            if (option.is('option') ) {
+                option.hide() }
+        } }
+});
+let auto_in = "{{ auto_in_J|escapejs }}";
+{#auto_in = auto_in.replace(/&quot;/g,'"');#}
+auto_in = JSON.parse(auto_in);
+
+
+
+let ves_last=0;
+function getData(){
+    var num = $('#gos_num_avto').html();
+    if(status!="true"){
+        auto_in.forEach(function (a) {
+            console.log(a);
+            if(a.fields.number==num.replace(/-/g,'')){
+                 console.log(num.replace(/-/g,''));
+                status1 = true;
+                $("#DataNakladnaya").hide();
+                $("#dataTransport").hide();
+                return;
+            }else{
+                status1= false;
+                $("#DataNakladnaya").show();
+                 $("#dataTransport").show();
+            }
+        });
+    }else{
+        $("#DataNakladnaya").show();
+        $("#dataTransport").show();
+    }
+    let data ={"zanyato":true,"all":false};
+              $.ajax({
+                type: "POST",
+                url: '{% url 'getDataAuto' %}',
+                traditional: true,
+                dataType: 'json',
+                data: data,
+                success: function (dat) {
+		if(dat.bits[3]=="0"){$("#svbit_3").removeClass("btn-success"); $("#svbit_3").addClass(" btn-danger");}else{$("#svbit_3").removeClass("btn-danger"); $("#svbit_3").addClass(" btn-success");}
+if(dat.bits[4]=="0"){$("#svbit_4").removeClass("btn-success"); $("#svbit_4").addClass(" btn-danger");}else{$("#svbit_4").removeClass("btn-danger"); $("#svbit_4").addClass(" btn-success");}
+
+if(dat.bits[7]=="0"){$("#svbit_6").removeClass("btn-success"); $("#svbit_6").addClass(" btn-danger");}else{$("#svbit_6").removeClass("btn-danger"); $("#svbit_6").addClass(" btn-success");}
+
+if(dat.bits[6]=="0"){$("#svbit_7").removeClass("btn-success"); $("#svbit_7").addClass(" btn-danger");}else{$("#svbit_7").removeClass("btn-danger"); $("#svbit_7").addClass(" btn-success");}
+if(dat.bits=="error"){
+$("#svbit_3").prop("disabled",true);
+$("#svbit_4").prop("disabled",true);
+$("#svbit_6").prop("disabled",true);
+$("#svbit_7").prop("disabled",true);
+}else{
+$("#svbit_3").prop("disabled",false);
+$("#svbit_4").prop("disabled",false);
+$("#svbit_6").prop("disabled",false);
+$("#svbit_7").prop("disabled",false);
+}
+		if(ves_last==dat.ves && dat.ves!="error"){
+		$("#parentVesOnline").css('background-color', '#2f6017');
+		$("#parentVesOnline").css('color', 'white');
+		$("#fixVes").prop("disabled",false);
+		$("#lineVes").removeClass("border border-danger");
+		 }else if(dat.ves=="error"){
+		$("#parentVesOnline").css('background-color', 'red');
+		$("#parentVesOnline").css('color', 'white');
+		$("#fixVes").prop("disabled",true);
+		$("#lineVes").addClass("border border-danger");
+		}else{
+		$("#parentVesOnline").css('background-color', '#e6c100');
+		$("#parentVesOnline").css('color', 'black');
+		$("#fixVes").prop("disabled",true);
+		$("#lineVes").removeClass("border border-danger");
+		}
+		ves_last=dat.ves;
+		$("#vesOnline").html(dat.ves)
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+}
+getData();
+
+setInterval(getData, 1000);
+
+
+
+
+
+
+
+$(document).ready(function(){$("[data-bs-hover-animate]").mouseenter(function(){var a=$(this);a.addClass("animated "+a.attr("data-bs-hover-animate"))}).mouseleave(function(){var a=$(this);a.removeClass("animated "+a.attr("data-bs-hover-animate"))})});
+
+
+function tableAutoIn(){
+    let ready='';
+    auto_in.forEach(function(a,b){
+        ready+=`<tr>
+                <td>${a.number}</td>
+                <td>${a.operatrion}</td>
+                <td>${a.nameagent}</td>
+                <td>Cell 3</td>
+                <td>${a.last_in}</td>
+                <td><button id="to_right${a.id}" class="btn btn-primary btM" onclick="replaceRight('${a.number}')" type="button">------></button></td>
+            </tr>`;
+    });
+    $("#auti_in").html(ready);
+}
+
+$(document).ready(function(){
+    tableAutoIn();
+});
+
+
+
+    </script>
+
+{#Работа с таблицей слева#}
+<script>
+$(document).ready(function(){
+  $('table tr button').on('click', function(e) {
+    $('table tr').removeClass('marked');
+    $(this).parent("td").parent("tr").addClass('marked');
+  });
+});
+</script>
+
+    <style>
+        .hidden-menu {
+            display: block;
+            position: fixed;
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+
+            box-sizing: border-box;
+            width: 80%;
+            background-color: #eee;
+            height: 100%;
+            top: 10%;
+            left: -80%;
+            transition: left .2s;
+            z-index: 2;
+            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+        }
+
+        .hidden-menu-ticker {
+            display: none;
+        }
+
+        .btn-menu {
+            color: #fff;
+            background-color: #0058B9;
+            padding: 7px;
+            position: fixed;
+            top: 75px;
+            left: 5px;
+            cursor: pointer;
+            transition: left .43s;
+            z-index: 3;
+            width: 200px;
+            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+        }
+
+        .btn-menu span {
+            display: block;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0 0;
+            transition: all .1s linear .43s;
+            position: relative;
+        }
+
+        .btn-menu span.first {
+            margin-top: 0;
+        }
+
+        .hidden-menu-ticker:checked ~ .btn-menu {
+            left: 70%;
+        }
+
+        .hidden-menu-ticker:checked ~ .hidden-menu {
+            left: 0;
+        }
+
+        .hidden-menu-ticker:checked ~ .btn-menu span.first {
+            -webkit-transform: rotate(45deg);
+            top: 8px;
+
+        }
+
+        .hidden-menu-ticker:checked ~ .btn-menu span.second {
+            opacity: 0;
+        }
+
+        .hidden-menu-ticker:checked ~ .btn-menu span.third {
+            -webkit-transform: rotate(-45deg);
+            top: -8px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+    </style>
+
+
+    <style>
+        table tr.marked {
+        background-color: #007bff2e;
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+{% endblock %}

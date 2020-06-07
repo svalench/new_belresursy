@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="article-list">
+        <div class="container">
+
+      <div class="row articles">
+                <div class="col-sm-6 col-md-4 item"><a href="{% url 'ves:menu_ves' %}"><img class="img-fluid" src="{% static 'img/img/weight.svg' %}"></a>
+                    <h3 class="name">ВЗВЕШИВАНИЕ</h3>
+                    <p class="description" style="padding-bottom: 20px;">Пункт управления весовой станцией автомобильного и железнодорожного транспорта</p>
+                </div>
+                <div class="col-sm-6 col-md-4 item"><a href="{% url 'ves:menu_data' %}"><img class="img-fluid" src="{% static 'img/img/database.svg' %}"></a>
+                    <h3 class="name">БАЗА ДАННЫХ</h3>
+                    <p class="description">Пункт управления информацией</p>
+                </div>
+                <div class="col-sm-6 col-md-4 item"><a href="{% url 'ves:menu_data' %}"><img class="img-fluid" src="{% static 'img/img/camera.svg' %}"></a>
+                    <h3 class="name">КАМЕРЫ</h3>
+                    <p class="description">Просмотр изображений с камер авто и ж/д </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <style>
+    .blockmenu:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+</style>
+{% endblock %}
+

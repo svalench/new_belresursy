@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <link rel="stylesheet" href="{% static 'boostrap/css/bootstrap.min.css' %}">
+{#  <link rel="stylesheet" href="{% static 'css/Article-List.css' %}">#}
+{#        <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">#}
+        <link rel="stylesheet" href="{% static 'css/Features-Boxed.css' %}">
+{#        <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">#}
+{#        <link rel="stylesheet" href="{% static 'css/styles.css' %}">#}
+{#        <link rel="stylesheet" href="{% static 'css/table-css.css' %}">#}
+    <script src="{% static 'boostrap/js/bootstrap.min.js' %}"></script>
+  <!-- End: Navigation with Button -->
+    <!-- Start: Features Boxed -->
+    <div class="features-boxed" style="background-color: rgb(255,255,255);">
+        <div class="container">
+            <!-- Start: Features -->
+            <div  class="row justify-content-center features">
+                <div onclick="gotoaddAgent()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">
+                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/conteragent.svg' %}" style="width: 260px;padding-top: 20px;">
+                        <h3 class="name">Контрагенты</h3>
+                        <p class="description" style="padding-bottom: 20px;">Добавление и редактирование списков контрагентов</p>
+                    </div>
+                </div>
+                <div onclick="gotoViewActions()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">
+                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/magazine.svg' %}" style="width: 260px;padding-top: 20px;">
+                        <h3 class="name">Журнал событий</h3>
+                        <p class="description" style="padding-bottom: 20px;">Журнал действий пользователя, зарегистрированных в системе</p>
+                    </div>
+                </div>
+
+
+                 <div onclick="gotoUserAdd()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">
+                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/users.svg' %}" style="width: 260px;padding-top: 20px;">
+                        <h3 class="name">Журнал пользователей</h3>
+                        <p class="description" style="padding-bottom: 20px;">Журнал пользователей. Добавление, удаление, редактирование пользователей системы.</p>
+                    </div>
+                 </div>
+{#                      <div onclick="gotoEventSys()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">#}
+{#                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/systemEvent.svg' %}" style="width: 260px;padding-top: 20px;">#}
+{#                        <h3 class="name">Журнал системных сообщений</h3>#}
+{#                        <p class="description" style="padding-bottom: 20px;">Журнал системных сообщений. Просмотр сообщений ситемы. Бд системы.</p>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <div onclick="gotoaddAgent()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">
+                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/catalogAuto.svg' %}" style="width: 260px;padding-top: 20px;">
+                        <h3 class="name">Каталог автотранспорта</h3>
+                        <p class="description" style="padding-bottom: 20px;">Добавление и редактирование списков автотранспорта</p>
+                    </div>
+                </div>
+
+                <div onclick="catalogProduction()" class="col-sm-12 col-md-4 col-lg-4 col-xl-4 item" style="padding: 10px 15px;">
+                    <div class="box" style="padding: 0px;"><img src="{% static 'img/img/catalogGlass.svg' %}" style="width: 260px;padding-top: 20px;">
+                        <h3 class="name">Каталог продукции</h3>
+                        <p class="description" style="padding-bottom: 20px;">Добавление и редактирование списков продукции</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End: Features -->
+        </div>
+    </div>
+    <!-- End: Features Boxed -->
+    <script src="{% static 'popper.js' %}" ></script>
+<script src="{% static 'b.min.js' %}" ></script>
+
+
+        <style>
+    .menu:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+</style>
+
+    <script>
+function gotoaddAgent() {
+    window.location.href = "{% url 'ves:contragents' %}";
+}
+function gotoViewActions() {
+    window.location.href = "{% url 'ves:actions' %}";
+}
+function gotoUserAdd() {
+window.location.href = "{% url 'ves:users' %}";
+}
+function gotoEventSys() {
+window.location.href = "{% url 'ves:users' %}";
+}
+function catalogProduction(){
+window.location.href = "{% url 'ves:catalogProduction' %}";
+}
+    </script>
+
+{% endblock %}
