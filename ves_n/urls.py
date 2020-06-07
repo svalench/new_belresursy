@@ -40,8 +40,8 @@ urlpatterns = [
     path('addaction/',addactionView, name='addaction'),
 
     path('addvagonPOST/',addVagonPost, name='addVagonPOST'),
-    path('addcontragentPOST/',addContragentView, name='addcontragentPOST'),
-    path('updcontragentPOST/',updContragentView, name='updcontragentPOST'),
+    path('addcontragentPOST/', addContragentView, name='addcontragentPOST'),
+    path('updcontragentPOST/', updContragentView, name='updcontragentPOST'),
     path('getDataAuto/', GetDataAuto, name='getDataAuto'),
     path('getDataZd/', GetDataZd, name='getDataZd'),
     path('getDataStatus/', GetDataStatus, name='getDataStatus'),

@@ -51,7 +51,7 @@
                                     </div>
 
                                     <div class="md-form mb-5">
-                                        <input type="text" id="characteristicTmcAdd" class="form-control">
+                                        <input type="text" id="characteristicTmcAdd" list="listCharackteristicTmc" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="characteristicTmcAdd">Характеристика ТМЦ</label>
                                     </div>
@@ -130,7 +130,7 @@
                                     </div>
 
                                     <div class="md-form mb-5">
-                                        <input type="text" id="characteristicTmcUpdate" class="form-control">
+                                        <input type="text" id="characteristicTmcUpdate" list="listCharackteristicTmc" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="characteristicTmcAdd">Характеристика ТМЦ</label>
                                     </div>
@@ -268,7 +268,17 @@
         </div>
     </div>
 </div>
-
+ <datalist id="listCharackteristicTmc">
+            <option value="Стеклобой смешанный тарный завод"></option>
+            <option value="Отходы цветной металлолом"></option>
+            <option value="Отходы металлолом"></option>
+            <option value="Отходы ПЭТ-бутылка"></option>
+            <option value="Отсев(продукция)"></option>
+            <option value="Стеклобой бесцветный"></option>
+            <option value="Стеклобой коричневый"></option>
+            <option value="Стеклобой зеленый"></option>
+            <option value="Отходы реализуемые для использования"></option>
+        </datalist>
 <script>
 let mega_id;
 function  getId(id) {

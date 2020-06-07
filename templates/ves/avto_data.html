@@ -53,8 +53,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row pb-1">
-                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p1Contragent" class="form-control" /></div>
-                                    <div class="col"><label>Договор</label><input type="text" id="p1Contract" class="form-control" /></div>
+                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p1Contragent" list="listAgents" class="form-control" /></div>
+                                    <div class="col"><label>Договор</label><input type="text" id="p1Contract" list="listCotracts" class="form-control" /></div>
                                 </div>
                             </div>
                         </div>
@@ -196,8 +196,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row pb-1">
-                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p2Contragent" class="form-control" /></div>
-                                    <div class="col"><label>Договор</label><input type="text" id="p2Contract" class="form-control" /></div>
+                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p2Contragent" list="listAgents" class="form-control" /></div>
+                                    <div class="col"><label>Договор</label><input type="text" id="p2Contract" list="listCotracts" class="form-control" /></div>
                                 </div>
                             </div>
                         </div>
@@ -330,8 +330,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row pb-1">
-                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p3Contragent" class="form-control" /></div>
-                                    <div class="col"><label>Договор</label><input type="text" id="p3Contract" class="form-control" /></div>
+                                    <div class="col-5"><label>Контрагенты</label><input type="text" id="p3Contragent" list="listAgents" class="form-control" /></div>
+                                    <div class="col"><label>Договор</label><input type="text" id="p3Contract" list="listCotracts" class="form-control" /></div>
                                 </div>
                             </div>
                         </div>
@@ -564,11 +564,11 @@
                         </div>
                         <input type="date" name="datecontract" id="datecontract" hidden>
                         <div class="row pb-1">
-                            <div class="col-5"><label>Контрагент</label><input type="text" id="actContragent" name="actContragent" class="form-control" /></div>
+                            <div class="col-5"><label>Контрагент</label><input type="text" id="actContragent" list="listAgents" name="actContragent" class="form-control" /></div>
                             <div class="col-7"><label>Адрес контрагента</label><input type="text" id="actAddressContragent" name="actAddressContragent" class="form-control" /></div>
                         </div>
                         <div class="row pb-1">
-                            <div class="col-6"><label>Договор</label><input type="text" id="actContract" name="actContract" class="form-control" /></div>
+                            <div class="col-6"><label>Договор</label><input type="text" id="actContract" list="listCotracts" name="actContract" class="form-control" /></div>
                             <div class="col-6"><label>Наименование и номер транспортного средства</label><input type="text" id="actNameAuto" name="actNameAuto" class="form-control" /></div>
                         </div>
                         <div class="row pb-1">
@@ -635,8 +635,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row pb-1">
-                                    <div class="col-7"><label>Контрагенты</label><input type="text" id="t2Contragent" class="form-control" /></div>
-                                    <div class="col-5"><label>Договор</label><input type="text" id="t2Contract" class="form-control" /></div>
+                                    <div class="col-7"><label>Контрагенты</label><input type="text" id="t2Contragent" list="listAgents" class="form-control" /></div>
+                                    <div class="col-5"><label>Договор</label><input type="text" id="t2Contract" list="listCotracts" class="form-control" /></div>
                                 </div>
                                 <div class="row pb-1">
                                     <div class="col"><label>Плательщик</label><input type="text" id="t2Payman" class="form-control" /></div>
@@ -714,19 +714,19 @@
                         </div>
                         <div class="row pb-1">
                             <div class="col-7"><label>Отпуск разрешил - должность</label><input type="text" id="t3VacationAllowedProf" class="form-control" /></div>
-                            <div class="col-5"><label>Отпуск разрешил - ФИО</label><input type="text" id="t3VacationAllowedName" class="form-control" /></div>
+                            <div class="col-5"><label>Отпуск разрешил - ФИО</label><input type="text" id="t3VacationAllowedName" list="listResponseblePerson" class="form-control" /></div>
                         </div>
                         <div class="row pb-1">
                             <div class="col-7"><label>Сдал грузоотправитель- должность</label><input type="text" id="t3GetConsignorProf" class="form-control" /></div>
-                            <div class="col-5"><label>Сдал грузоотправитель - ФИО</label><input type="text" id="t3GetConsignorName" class="form-control" /></div>
+                            <div class="col-5"><label>Сдал грузоотправитель - ФИО</label><input type="text" id="t3GetConsignorName" list="listResponseblePerson" class="form-control" /></div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="row">
                             <div class="col">
                                 <div class="row pb-1">
-                                    <div class="col-7"><label>Контрагенты</label><input type="text" id="t3Contragent" class="form-control" /></div>
-                                    <div class="col-5"><label>Договор</label><input type="text" id="t3Contract" class="form-control" /></div>
+                                    <div class="col-7"><label>Контрагенты</label><input type="text" list="listAgents" id="t3Contragent" class="form-control" /></div>
+                                    <div class="col-5"><label>Договор</label><input type="text" id="t3Contract" list="listCotracts" class="form-control" /></div>
                                 </div>
                             </div>
                         </div>
@@ -796,6 +796,12 @@
             <option value="кг"></option>
             <option value="тн"></option>
         </datalist>
+        <datalist id="listCotracts">
+            {%for c in contract%}
+            <option value="{{c.name}}"></option>
+            {%endfor%}
+        </datalist>
+
         <datalist id="listUnitPrice">
             <option value="BYN"></option>
             <option value="RUB"></option>
@@ -847,6 +853,13 @@
             <option value="Реализация материалов">
             </option>
         </datalist>
+
+        <datalist id="listAgents">
+            {%for a in agents%}
+            <option value="{{a.name}}"></option>
+            {% endfor%}
+        </datalist>
+
         <datalist id="listNameTmc">
 
          </datalist>
@@ -1436,6 +1449,8 @@ function transferDataToModalAkt(num){
          tara = actual.weghtIn;
          gruz = actual.weghtOut;
     }
+
+  document.getElementById("t"+num+"CurrentDate").valueAsDate = new Date();
     $("#t"+num+"CellNumberAuto").html(actual.number);
     $("#gos_num_pricep").val(actual.numberPricep);
     $("#t"+num+"SeriesInvoice").val(actual.seria);

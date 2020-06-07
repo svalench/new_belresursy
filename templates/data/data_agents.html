@@ -310,26 +310,6 @@
                  addAction('оператор добавляя запись в список не указал название контрагента');
                 alert('Вы не ввели название контрагента'); $("#contragentName").focus(); return;
             }
-            if(!unp){
-                 addAction('оператор добавляя запись в список не указал УНП контрагента');
-                alert('Вы не указали УНП контрагента'); $("#unp").focus(); return;
-            }
-            if(!address){
-                 addAction('оператор добавляя запись в список не указал адрес контрагента');
-                alert('Вы не указали адрес контрагента'); $("#unp").focus(); return;
-            }
-
-             if (!description) {
-                addAction('оператор добавляя запись в список не написал описание контрагента ');
-                if (!confirm('Вы не описание контрагента. Продолжить?')) {
-                    return;
-                }
-            }
-             if (!unp.match(/[0-9]{9}/)) {
-                alert("В поле УНП должны быть введены только 9 цифр");
-                $("#unp").focus();
-                return;
-            }
 
 
              // post data to server
@@ -343,7 +323,7 @@
              };
              $.ajax({
                 type: "POST",
-                url: '{% url 'addcontragentPOST' %}',
+                url: '{% url "addcontragentPOST" %}',
                 data: data,
                 success: function () {
                     addAction("Добавил контрагента");

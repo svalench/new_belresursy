@@ -85,10 +85,9 @@ class StartView(LoginRequiredMixin, CreateView):
         #print(auto[0].datanakladnayaauto_set.get().productionId.name)
         if (one_entry.Auto == True):
             print('woops')
-            #raise exceptions.PermissionDenied
+            raise exceptions.PermissionDenied
         data = {'auto_in': auto,'auto_in_J': autoJ,'catalog':catalogJ ,'contract':contract, 'agentsJ':agentsJ,'production':productionJ,'agents':agents,'JAuto':json1}
         return render(request, 'ves/avto_ves.html', data)
-
 
 
 
@@ -117,6 +116,7 @@ class StartView(LoginRequiredMixin, CreateView):
         data = {"data": json, 'person': person, 'allDataJS': to_js, 'allData': autoJ, 'Jagents': jsonAgent,
                 "agents": agent}
         return render(request, 'ves/zd_data.html', data)
+
 
 
 
@@ -179,7 +179,7 @@ class DataView(LoginRequiredMixin, CreateView):
                 print('Please correct the error below.')
         print("======")
         #print(users[5].profile.descriptions)
-        data = {'page_obj': page_obj,"all":users ,"users": agent_json,"roles":USER_ROLES_SETTINGS,"userform":user_form}
+        data = {'page_obj': page_obj, "users": agent_json,"roles":USER_ROLES_SETTINGS,"userform":user_form}
         return render(request, 'data/user_view.html', data)
 
     @login_required

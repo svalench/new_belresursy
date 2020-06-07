@@ -324,7 +324,7 @@ const clearFields = () => {
         var Table = [];
         var urlAjaxAdd= '';
 
-        let agents = "{{ agentsJ }}";
+        let agents = "{{ agentsJ|escapejs }}";
             agents = agents.replace(/&quot;/g,'"');
             agents = JSON.parse(agents);
         let tovar = "{{ production }}";

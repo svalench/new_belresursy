@@ -67,7 +67,18 @@ def addVagonPost(request):
 
 def addContragentView(request):
     form = request.POST
+    form._mutable = True
     now = datetime.now()
+    if 'unp' in form:
+        form["unp"] = None
+    if 'description' in form:
+        form["description"] = None
+    if 'payer' in form:
+        form["payer"] = None
+    if 'address' in form:
+        form["address"] = None
+    if 'punkt' in form:
+        form["punkt"] = None
     agent = Agent(name=form['name'],unp=form["unp"], description=form['description'], address=form['address'],payer=form['payer'],dischargePoint=form['punkt'])
     agent.save()
     payload = {'success': True}

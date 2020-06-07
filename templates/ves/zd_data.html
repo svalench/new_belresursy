@@ -315,7 +315,7 @@
         }
 
 
-let agents = "{{ Jagents }}";
+let agents = "{{ Jagents|escapejs }}";
 agents = agents.replace(/&quot;/g,'"');
 agents = JSON.parse(agents);
 let agent=[];
