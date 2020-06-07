@@ -23,6 +23,7 @@ from apps.ves.production import showProduction, AddProduction, UpdProduction, de
 from apps.ves.responseblePerson import showPerson, AddPerson, UpdPerson, deletePerson
 from apps.ves.trailer import showTrailer, UpdTrailer, AddTrailer, deleteTrailer
 from apps.ves.addUser import  UpdUser, AddUserNew, deleteUser
+from apps.ves.docGeneration import actGenerate
 from ves_n.views import *
 
 from channels.routing import ProtocolTypeRouter
@@ -86,8 +87,9 @@ urlpatterns = [
     path('data/personUpd', UpdPerson, name='personnUpd'),
     path('data/personDel', deletePerson, name='personDel'),
 
-    #отчеты
+
     path('reportAutoAgent/get', reportAutoAgent, name='reportAutoAgent'),
+    path('act/generate/get', actGenerate, name='actGenerate'),
 
     path('search/', serchAuto, name='search'),
 ]

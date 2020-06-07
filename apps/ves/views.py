@@ -91,16 +91,16 @@ class StartView(LoginRequiredMixin, CreateView):
 
 
 
+
     @login_required
     def avto_data(request):
         autoAll = Auto.objects.all()
         agent = Agent.objects.all()
-        contract = CatalogContract.objects.all()
         person = CatalogResponsiblePerson.objects.all()
         autoJ = getAutoAll()
         to_js = json.dumps(autoJ, indent=4, sort_keys=True, default=str)
         jsonAgent = serializers.serialize('json', agent)
-        data = {"data":json,'person':person,"contract":contract,'allDataJS':to_js,'allData':autoJ,'Jagents':jsonAgent,"agents":agent}
+        data = {"data":json,'person':person,'allDataJS':to_js,'allData':autoJ,'Jagents':jsonAgent,"agents":agent}
         return render(request, 'ves/avto_data.html', data)
 
 
@@ -117,7 +117,6 @@ class StartView(LoginRequiredMixin, CreateView):
         data = {"data": json, 'person': person, 'allDataJS': to_js, 'allData': autoJ, 'Jagents': jsonAgent,
                 "agents": agent}
         return render(request, 'ves/zd_data.html', data)
-
 
 
 
