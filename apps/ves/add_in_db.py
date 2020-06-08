@@ -2,7 +2,7 @@
 # класс для просмотра данных
 import json
 from datetime import datetime
-
+from apps.ves.plc_svet import *
 from aioredis.commands import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -198,6 +198,7 @@ def addAutoNew(request):
                     type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed= form['UnitWeight'], typeOperation= form['TypeArrival'],
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=False)
+        svetoforFromScaleOnStreet(request)
     else:
         if(not 'WeightInvoice' in form):
             form['WeightInvoice']=None
@@ -246,6 +247,7 @@ def addAutoNew(request):
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=True)
         auto.save()
+        svetoforFromScaleOnTerritory(request)
     allIn = Auto.objects.filter( status_in=True)
     all= my_custom_sql()
     allIn = serializers.serialize('json', allIn)

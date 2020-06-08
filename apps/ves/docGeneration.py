@@ -14,16 +14,17 @@ def actGenerate(request):
     print(auto)
     if 'actCurrentDateTime' in form:
         form['actCurrentDateTime'] = None
-    if 'actDateCommonComming' in form:
-        form['actDateCommonComming'] = None
+    #if 'actDateCommonComming' in form:
+        #form['actDateCommonComming'] = ''
     if 'actDateOut' in form:
         form['actDateOut'] = None
-    auto.update(actNumber=form['actNumberAct'],
-                datepriemsovmestny=form['actDateCommonComming'], dateotgruzka=form['actDateOut'])
-
+    
+    print(form['actDateCommonComming'])
     date = form['actDateCommonComming'].split("T")
     data =date[0]
     vremia = date[1]
+    auto.update(actNumber=form['actNumberAct'],
+                datepriemsovmestny=data, dateotgruzka=form['actDateOut'])
     data_act = {
         'act_number': form['actNumberAct'], 'date': data, 'time': vremia,
         'position01': form['actLoginUserProf'], 'name01': form['actLoginUserName'],
@@ -56,19 +57,19 @@ def actGenerate(request):
         form['actDateCommonComming']=None
     if 'actDateOut' in form:
         form['actDateOut']=None
-    auto.update(actNumber=form['actNumberAct'] ,datepriem = form['actCurrentDateTime'], datepriemsovmestny=form['actDateCommonComming'], dateotgruzka=form['actDateOut'])
+    #auto.update(actNumber=form['actNumberAct'] ,datepriem = form['actCurrentDateTime'], datepriemsovmestny=form['actDateCommonComming'], dateotgruzka=form['actDateOut'])
     now = datetime.now()
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     response['Content-Disposition'] = 'attachment; filename='+"_act__" + dt_string + '.docx'
-    doc = redactDocx(path_to_shablon='/home/mvlab/belresusrs/templates/doc/template1.docx', path_to_save_docx='res001.docx', Data=data_act,response=response)
+    doc = redactDocx(path_to_shablon='/home/mvlab/new_bel/new_belresursy/templates/doc/template1.docx', path_to_save_docx='res001.docx', Data=data_act,response=response)
     return response
 
 
-path00 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/cvetmet.xlsx'
-path01 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/chermet.xlsx'
-path02 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/pet.xlsx'
-path_vert = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_vertical/gen.xlsx'
+path00 = '/home/mvlab/new_bel/new_belresursy/templates/doc/auto/invoice_horizontal/cvetmet.xlsx'
+path01 = '/home/mvlab/new_bel/new_belresursy/templates/doc/auto/invoice_horizontal/chermet.xlsx'
+path02 = '/home/mvlab/new_bel/new_belresursy/templates/doc/auto/invoice_horizontal/pet.xlsx'
+path_vert = '/home/mvlab/new_bel/new_belresursy/templates/doc/auto/invoice_vertical/gen.xlsx'
 def nakladnaia_book(request):
     form = request.POST
     form._mutable = True

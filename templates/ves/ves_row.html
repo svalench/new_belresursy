@@ -9,13 +9,13 @@
         <div class="row no-gutters" id="lineVes" style="background-color: rgba(3,1,1,0.72);">
     <div class="col-2 align-self-center" id="ves">
         <div class="row no-gutters">
-            <div id="parentVesOnline" class="col-10 text-right" style="letter-spacing: 0px;background-color: #e6c100;margin-left: 10px;"><span id="vesOnline" style="font-family: Montserrat, sans-serif;font-size: 51px;cursor: not-allowed;padding-right: 10px;">140</span></div>
+            <div id="parentVesOnline" class="col-10 text-right" style="letter-spacing: 0px;background-color: #e6c100;margin-left: 10px;"><span id="vesOnline" style="font-family: Montserrat, sans-serif;font-size: 51px;cursor: not-allowed;padding-right: 10px;">0</span></div>
             <div class="col-1 d-xl-flex justify-content-xl-end align-items-xl-end"><span style="font-family: Montserrat, sans-serif;font-size: 24px;color: rgb(225,227,230);">кг</span></div>
         </div>
     </div>
     <div class="col-2 col-xl-2 align-self-center" id="brutto-netto" style="margin: 0px 30px;">
         <div class="row" style="color: rgb(255,255,255);">
-            <div class="col-8 text-right" style="background-color: #2f6017;"><span id="vesFix" style="font-family: Montserrat, sans-serif;font-size: 51px;cursor:pointer;" onclick="correct()">140</span></div>
+            <div class="col-8 text-right" style="background-color: #2f6017;"><span id="vesFix" style="font-family: Montserrat, sans-serif;font-size: 51px;cursor:pointer;" onclick="correct()">0</span></div>
             <div class="col-4 d-xl-flex align-items-xl-center">
                 <div class="row">
                     <div class="col-12 text-center" style="background-color: #210445;"><span id="status" style="font-family: Montserrat, sans-serif;font-size: 24px;">брутто</span></div>
@@ -127,7 +127,7 @@
 
         function fixVes() {
 
-     detect('/home/mvlab/belresusrs/static/camera/cam1.jpg');
+     detect('/home/mvlab/new_bel/new_belresursy/static/camera/cam1.jpg');
 
             addAction('вес зафиксирован');
             $("#vesFix").html($("#vesOnline").html());

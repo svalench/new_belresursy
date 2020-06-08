@@ -17,6 +17,7 @@ sys.path.append(NOMEROFF_NET_DIR)
 print(MASK_RCNN_DIR, MASK_RCNN_LOG_DIR)
 # ----------------------------------------------------------------------------------------------------------------------
 # Import license plate recognition tools.
+sys.path.insert(0, '/home/mvlab/new_bel/new_belresursy/nomer')
 from NomeroffNet import filters, RectDetector, TextDetector, OptionsDetector, Detector, textPostprocessing
 
 def saveIMG(image, path='/home/MV/dataSet'):
