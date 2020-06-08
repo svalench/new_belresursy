@@ -25,7 +25,7 @@ from apps.ves.trailer import showTrailer, UpdTrailer, AddTrailer, deleteTrailer
 from apps.ves.addUser import  UpdUser, AddUserNew, deleteUser
 from apps.ves.docGeneration import actGenerate, nakladnaia_book,nakladnaia_vertical
 from ves_n.views import *
-
+from apps.ves.plc_svet import *
 from channels.routing import ProtocolTypeRouter
 from django.views.defaults import server_error, page_not_found, permission_denied
 application = ProtocolTypeRouter({
@@ -55,6 +55,10 @@ urlpatterns = [
     path('getDataAuto/getautodate', GetAutoDate, name='getAutoDate'),
 
     path('onoff/svet1/',onOffS1,name='on1'),
+    path('onoff/vezd/',svetoforFromStreetOnScale,name='sulnaves'),
+    path('onoff/viezd/', svetoforFromScaleOnTerritory, name='svesonter'),
+    path('onoff/fromul/',svetoforFromTerritoryOnScale, name='steronscale'),
+    path('onoff/toul/', svetoforFromScaleOnStreet, name='fromscaletoul'),
     path('onoff/zd/svet1/',onOffZd,name='onoffzd'),
     path('add/auto/new',addAutoNew,name='newAddAuto'),
     path('upd/auto/data/new',updateAutoNew,name='updNewAuto'),
