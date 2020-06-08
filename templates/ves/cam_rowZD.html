@@ -1,38 +1,59 @@
 {% load static %}
 
-{#<div>#}
-{#        <div class="container-fluid"><span class="shadow" style="font-size: 22px;font-family: Aclonica, sans-serif;">Камеры</span></div>#}
-{#        <hr style="margin-top: 0px;">#}
-{#        <div class="container-fluid">#}
-{#            <div class="row">#}
-{#                <div class="col-md-4"><img class="rounded border border-primary shadow" width="90%" alt="camera1" src={% static "img/nonecam.png"  %}></div>#}
-{#                <div class="col-md-4"><img class="rounded border border-primary shadow" alt="camera2" width="90%"  src={% static "img/nonecam.png"  %} width="30%"></div>#}
-{#                <div class="col-md-4"><img class="rounded border border-primary shadow" id="cam3" alt="camera3" width="90%" src={% static "img/nonecam.png"  %}></div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-
 <div style="padding: 10px 0;">
         <div class="container-fluid">
             <h3 class="d-xl-flex justify-content-xl-center" id="clickDataCamera" style="color: rgb(34,121,208); cursor: pointer;">Камеры</h3>
             <hr style="margin-top: 0px;">
             <div class="row" id="cameraControl">
-                <div class="col-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="height: 70vh;"><img id="cam1" class="rounded img-fluid border border-primary shadow" width="90%" alt="camera1" src={% static "camera/cam4.png"  %}></div>
-                <div class="col-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="height: 70vh;"><img class="rounded border border-primary shadow d-xl-flex justify-content-xl-center align-items-xl-center" alt="camera2" id="cam2" src={% static "camera/cam5.jpg"  %} width="90%"></div>
-                <div class="col-4 d-xl-flex justify-content-xl-center align-items-xl-center"
-                    style="height: 70vh;"><img class="rounded border border-primary shadow" id="cam3" alt="camera3" width="90%" src={% static "camera/cam6.jpg"  %}></div>
+                <div class="col-4 d-flex justify-content-center align-items-center" style="height: 340px;"><img class="rounded img-fluid border border-primary shadow clickImg" width="100%" id="cam4" alt="camera4" src={% static "camera/cam4.jpg"  %}></div>
+                <div class="col-4 d-flex justify-content-center align-items-center" style="height: 340px;"><img class="rounded border border-primary shadow clickImg" id="cam5" alt="camera5" src={% static "camera/cam5.jpg"  %} width="100%"></div>
+                <div class="col-4 d-flex justify-content-center align-items-center"
+                    style="height: 340px;"><img class="rounded border border-primary shadow clickImg" id="cam6" alt="camera6" width="100%" src={% static "camera/cam6.jpg"  %}></div>
             </div>
         </div>
     </div>
+<div role="dialog" tabindex="-1" class="modal fade" id="camImgModal">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="nameCamID"></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="modal-body"><img id="currentImg" width="100%" height="100%" /></div>
+        </div>
+    </div>
+</div>
+
+<!--ПОКАЗЫВАТЬ ФОТО С КАМЕРЫ ВО ВЕСЬ ЭКРАН-->
+<script>
+    $('.clickImg').click(function(){
+        let ni = $(this).attr('id')[3];
+        // console.log(ni);
+        $('#nameCamID').text('ФОТО С КАМЕРЫ '+ni);
+        $('#currentImg').attr('src','/static/camera/cam'+ni+'.jpg');
+        $('#camImgModal').modal('show');
+    })
+</script>
+<style>
+    img{
+        cursor: pointer;
+    }
+    @media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 90%;
+  }
+}
+
+
+</style>
+
 
 <script>
 function upd_cam(){
-let cam1=document.getElementById('cam1');
-let cam2= document.getElementById('cam2');
-let cam3= document.getElementById('cam3');
-cam1.src = '/static/camera/cam4.jpg?'+Math.random();
-cam2.src = '/static/camera/cam5.jpg?'+Math.random();
-cam3.src = '/static/camera/cam6.jpg?'+Math.random();
+let cam4=document.getElementById('cam4');
+let cam5= document.getElementById('cam5');
+let cam6= document.getElementById('cam6');
+cam4.src = '/static/camera/cam4.jpg?'+Math.random();
+cam5.src = '/static/camera/cam5.jpg?'+Math.random();
+cam6.src = '/static/camera/cam6.jpg?'+Math.random();
 }
 setInterval(upd_cam,1000);
 </script>

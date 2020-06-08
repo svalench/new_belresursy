@@ -3,7 +3,7 @@
 {#Roma v2#}
 <div class="container-fluid">
             <div class="row no-gutters">
-                <div class="col-12 text-center align-self-center" id="clickDataNakladnaya" style="padding-top: 5px; cursor: pointer;"><span class="text-center text-black-50" style="font-size: 30px;">Заполнение накладной</span>
+                <div class="col-12 text-center align-self-center" id="clickDataNakladnaya" style="padding-top: 5px; cursor: pointer;"><span class="text-center text-black-50" style="font-size: 30px;">Информация о транспорте</span>
                     <hr style="margin-top: 0;">
                 </div>
             </div>
@@ -30,8 +30,8 @@
                                 <div class="col-5 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p1DataAuto">Автомобиль</label></div>
                                 <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p1DataTrailer">Прицеп</label></div>
                                 <div class="col-3 d-xl-flex justify-content-center align-items-center"><input type="text" id="p1NameDriver" class="form-control text-center" style="width: 98%" placeholder="Фамилия И.О." /></div>
-                                <div class="col-5 d-xl-flex justify-content-center align-items-center"><input type="text" id="p1DataAuto" class="form-control text-center" style="width: 98%" readonly /></div>
-                                <div class="col-4 d-xl-flex justify-content-center align-items-center"><input type="text" id="p1DataTrailer" class="form-control text-center" style="width: 98%;" readonly /></div>
+                                <div class="col-5 d-xl-flex justify-content-center align-items-center"><input type="text" id="p1DataAuto" class="form-control text-center" style="width: 98%"/></div>
+                                <div class="col-4 d-xl-flex justify-content-center align-items-center"><input type="text" id="p1DataTrailer" class="form-control text-center" style="width: 98%;"/></div>
                             </div>
                             <div class="row no-gutters border border-primary border-left-0 border-right-0" style="padding-bottom: 5px;">
                                 <div class="col-6 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p1Contragent">Контрагент</label></div>
@@ -59,7 +59,7 @@
                                 <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p1NumberInvoice">Номер накладной</label></div>
                                 <div class="col-3 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p1DateInvoice">Дата накладной</label></div>
                                 <div class="col-2 text-center d-flex justify-content-center align-items-center"><select id="p1TypeInvoice" class="custom-select form-control" style="width:80%;">
-                                    <option value="ТН" selected>ТН</option><option value="ТТН">ТТН</option><option value="ТЖН" selected>ТЖН</option></select></div>
+                                    <option value="ТН" selected>ТН</option><option selected value="ТТН">ТТН</option><option value="ТЖН">ТЖН</option></select></div>
                                 <div class="col-3 text-center d-flex justify-content-center align-items-center"><input type="text" id="p1SeriesInvoice" class="form-control text-center" style="width: 60%;" /></div>
                                 <div class="col-4 text-center d-flex justify-content-center align-items-center"><input type="text" id="p1NumberInvoice" class="form-control text-center" style="width: 98%;" /></div>
                                 <div class="col-3 text-center d-flex justify-content-center align-items-center"><input id="p1DateInvoice" class="form-control" type="date" style="width:98%" /></div>
@@ -81,13 +81,13 @@
                         <div class="row no-gutters border border-primary border-left-0 border-right-0 border-top-0" style="padding-bottom: 5px;">
                             <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p1TypeArrival">Вид прихода</label></div>
                             <div class="col-3 offset-5 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p1DirtPercent">% Засора</label></div>
-                            <div class="col-4 text-center d-flex justify-content-center align-items-center"><select class="custom-select form-control" id="p1TypeArrival"><option value="От отходов производства" selected>От отходов производства</option><option value="От отходов потребления">От отходов потребления</option></select></div>
+                            <div class="col-4 text-center d-flex justify-content-center align-items-center"><select class="custom-select form-control" id="p1TypeArrival"><option value="От отходов производства">От отходов производства</option><option selected value="От отходов потребления">От отходов потребления</option></select></div>
                             <div class="col-3 offset-5 text-center d-flex justify-content-center align-items-center"><input type="text" id="p1DirtPercent" class="form-control" style="width: 98%;" /></div>
                         </div>
                         <div class="row no-gutters justify-content-end border border-primary border-left-0 border-right-0 border-top-0" style="padding-top: 5px;padding-bottom: 5px;">
                             <div class="col d-xl-flex justify-content-xl-center align-items-xl-center"><span style="font-size: 26px;color: rgb(85,141,249);">Выберите действие с формой ---&gt; </span></div>
                             <div class="col-3 mr-4"><button class="btn btn-outline-warning" id="p1ButtonClearForm" type="button" style="width: 98%;font-size: 26px;">Очистить</button></div>
-                            <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success" onclick="saveFormTable(1)" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
+                            <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success openModalSave" id="saveForm1" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
                         </div>
                     </div>
                 </div>
@@ -105,9 +105,9 @@
                             <div class="col-3 text-center d-flex justify-content-center align-items-center">
                                 <input type="text" id="p2NameDriver" class="form-control text-center" style="width: 98%" placeholder="Фамилия И.О." /></div>
                             <div class="col-5 text-center d-flex justify-content-center align-items-center">
-                                <input type="text" id="p2DataAuto" class="form-control text-center" style="width: 98%" readonly /></div>
+                                <input type="text" id="p2DataAuto" class="form-control text-center" style="width: 98%"/></div>
                             <div class="col-4 text-center d-flex justify-content-center align-items-center">
-                                <input type="text" class="form-control text-center" id="p2DataTrailer" style="width: 98%;" readonly /></div>
+                                <input type="text" class="form-control text-center" id="p2DataTrailer" style="width: 98%;"/></div>
                         </div>
                         <div class="row no-gutters border border-primary border-left-0 border-right-0" style="padding-bottom: 5px;">
                             <div class="col-6 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p2Contragent">Контрагент</label></div>
@@ -130,7 +130,7 @@
                             <div class="col-2 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p2TypeInvoice">Тип накладной</label></div>
                             <div class="col-3 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p2SeriesInvoice">Серия накладной</label></div>
                             <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p2NumberInvoice">Номер накладной</label></div>
-                            <div class="col-3 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p1DateInvoice">Дата накладной</label></div>
+                            <div class="col-3 text-center d-flex justify-content-center align-items-center"><label class="col-form-label text-center" for="p2DateInvoice">Дата накладной</label></div>
                             <div class="col-2 text-center d-flex justify-content-center align-items-center">
                                 <select class="custom-select form-control" id="p2TypeInvoice" style="width:80%;">
                                     <option value="ТН-1">ТН-1</option>
@@ -144,7 +144,7 @@
                         <div class="col-4 text-center d-flex justify-content-center align-items-center">
                             <input type="text" id="p2NumberInvoice" class="form-control text-center" style="width: 98%;" /></div>
                         <div class="col-3 text-center d-flex justify-content-center align-items-center">
-                            <input id="p1DateInvoice" class="form-control" type="date" style="width:98%" /></div>
+                            <input id="p2DateInvoice" class="form-control" type="date" style="width:98%" /></div>
                     </div>
                     <div class="row no-gutters border border-primary border-left-0 border-right-0" style="padding-bottom:5px">
                         <div class="col-3 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p2TypeMaterialOut">Тип материала отгрузки</label></div>
@@ -169,7 +169,7 @@
             <div class="row no-gutters justify-content-end border border-primary border-left-0 border-right-0 border-top-0" style="padding-top: 71px;padding-bottom: 5px;">
                 <div class="col d-flex justify-content-center align-items-center"><span style="font-size: 26px;color: rgb(85,141,249);">Выберите действие с формой ---&gt; </span></div>
                 <div class="col-3 mr-4"><button class="btn btn-outline-warning" id="p2ButtonClearForm" type="button" style="width: 98%;font-size: 26px;">Очистить</button></div>
-                <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success" onclick="saveFormTable(2)" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
+                <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success openModalSave" id="saveForm2" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
             </div>
         </div>
     </div>
@@ -185,8 +185,8 @@
                 <div class="col-5 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p3DataAuto">Автомобиль</label></div>
                 <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p3DataTrailer">Прицеп</label></div>
                 <div class="col-3 text-center d-flex justify-content-center align-items-center"><input type="text" id="p3NameDriver" class="form-control text-center" style="width: 98%" placeholder="Фамилия И.О." /></div>
-                <div class="col-5 text-center d-flex justify-content-center align-items-center"><input type="text" id="p3DataAuto" class="form-control text-center" style="width: 98%" readonly /></div>
-                <div class="col-4 text-center d-flex justify-content-center align-items-center"><input type="text" class="form-control text-center" id="p3DataTrailer" style="width: 98%;" readonly /></div>
+                <div class="col-5 text-center d-flex justify-content-center align-items-center"><input type="text" id="p3DataAuto" class="form-control text-center" style="width: 98%" /></div>
+                <div class="col-4 text-center d-flex justify-content-center align-items-center"><input type="text" class="form-control text-center" id="p3DataTrailer" style="width: 98%;" /></div>
             </div>
             <div class="row no-gutters border border-primary border-left-0 border-right-0" style="padding-bottom: 5px;">
                 <div class="col-6 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p3Contragent">Контрагент</label></div>
@@ -249,7 +249,7 @@
 <div class="row no-gutters justify-content-end border border-primary border-left-0 border-right-0 border-top-0" style="padding-top: 23px;padding-bottom: 5px;">
     <div class="col text-center d-flex justify-content-center"><span style="font-size: 26px;color: rgb(85,141,249);">Выберите действие с формой ---&gt; </span></div>
     <div class="col-3 mr-4"><button class="btn btn-outline-warning" id="p3ButtonClearForm" type="button" style="width: 98%;font-size: 26px;">Очистить</button></div>
-    <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success" onclick="saveFormTable(3)" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
+    <div class="col-3"><button class="btn btn-success text-sm-center d-xl-flex justify-content-xl-center btn-success openModalSave" id="saveForm3" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
 </div>
 </div>
 </div>
@@ -265,26 +265,35 @@
                 <div class="col-5 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4DataAuto">Автомобиль</label></div>
                 <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4DataTrailer">Прицеп</label></div>
                 <div class="col-3 text-center d-flex justify-content-center align-items-center"><input type="text" id="p4NameDriver" class="form-control text-center" style="width: 98%" placeholder="Фамилия И.О." /></div>
-                <div class="col-5 text-center d-flex justify-content-center align-items-center"><input type="text" id="p4DataAuto" class="form-control text-center" style="width: 98%" readonly /></div>
-                <div class="col-4 text-center d-flex justify-content-center align-items-center"><input type="text" class="form-control text-center" id="p4DataTrailer" style="width: 98%;" readonly /></div>
+                <div class="col-5 text-center d-flex justify-content-center align-items-center"><input type="text" id="p4DataAuto" class="form-control text-center" style="width: 98%" /></div>
+                <div class="col-4 text-center d-flex justify-content-center align-items-center"><input type="text" class="form-control text-center" id="p4DataTrailer" style="width: 98%;" /></div>
+            </div>
+            <div class="row no-gutters border border-primary border-left-0 border-right-0 border-bottom-0" style="padding-bottom: 5px;padding-top: 5px;">
+                <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4NumberAccompanyingPassport"> Номер сопроводительного паспорта</label></div>
+                <div class="col-3 text-center d-flex justify-content-center align-items-center"><input type="text" id="p4NumberAccompanyingPassport" class="form-control text-center" style="width: 98%;" /></div>
             </div>
             <div class="row no-gutters border border-primary border-left-0 border-right-0" style="padding-bottom: 5px;">
                 <div class="col-12 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4Description">Описание</label></div>
-                <div class="col-12 text-center d-flex justify-content-center align-items-center"><textarea id="p4Description" class="form-control" style="width: 98%;min-height: 38px;height: 38px;"></textarea></div>
+                <div class="col-12 text-center d-flex justify-content-center align-items-center"><textarea id="p4Description" class="form-control" style="width: 98%;min-height: 70px;height: 38px;"></textarea></div>
             </div>
         </div>
         <div class="col-6 text-center border border-primary border-left-0 border-top-0 border-right-0 border-bottom-0" style="background-image: url({% static 'img/back2.svg' %});background-repeat: no-repeat;background-position: center;background-size: contain;">
             <div class="row no-gutters">
                 <div class="col"><span style="font-size: 21px;">Дополнительные поля</span></div>
             </div>
-            <div class="row no-gutters border border-secondary border-left-0 border-right-0 border-bottom-0" style="padding-bottom: 5px;padding-top: 5px;">
-                <div class="col-4 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4NumberAccompanyingPassport"> Номер сопроводительного паспорта</label></div>
-                <div class="col-3 text-center d-flex justify-content-center align-items-center"><input type="text" id="p4NumberAccompanyingPassport" class="form-control text-center" style="width: 98%;" /></div>
+            <div class="row no-gutters border border-secondary border-left-0 border-right-0 border-bottom-0" style="padding-bottom: 5px;">
+                <div class="col-6 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4Contragent">Контрагент</label></div>
+                <div class="col-6 text-center d-flex justify-content-center align-items-center"><label class="col-form-label" for="p4Contract">Договор</label></div>
+                <div class="col-6 text-center d-flex justify-content-center align-items-center"><textarea id="p4Contragent" class="form-control" style="width: 98%;min-height: 38px;height: 38px;" readonly></textarea></div>
+                <div class="col-6 text-center d-flex justify-content-center align-items-center"><textarea id="p4Contract" class="form-control" style="width: 98%;min-height: 38px;height: 38px;" readonly></textarea></div>
+                <div class="col-6 text-center d-flex justify-content-center align-items-center" style="padding-top: 5px;padding-bottom: 5px;"><button class="btn btn-outline-primary" type="button" style="width: 70%;min-height: 38px;height: 38px;" onclick="show_serchAgent(a=4)">Выбрать</button></div>
+                <div class="col-6 text-center d-flex justify-content-center align-items-center" style="padding-top: 5px;padding-bottom: 5px;"><button class="btn btn-outline-primary" type="button" style="width: 70%;min-height: 38px;height: 38px;" onclick="show_serchContract(a=4)">Выбрать</button></div>
             </div>
+
             <div class="row no-gutters justify-content-end border border-primary border-left-0 border-right-0" style="padding-top: 56px;padding-bottom: 5px;">
                 <div class="col text-center d-flex justify-content-center"><span style="font-size: 26px;color: rgb(85,141,249);">Выберите действие с формой ---&gt; </span></div>
                 <div class="col-3 mr-4"><button class="btn btn-outline-warning" id="p4ButtonClearForm" type="button" style="width: 98%;font-size: 26px;">Очистить</button></div>
-                <div class="col-3"><button class="btn btn-success text-center d-flex justify-content-center btn-success" onclick="saveFormTable(4)" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
+                <div class="col-3"><button class="btn btn-success text-center d-flex justify-content-center btn-success openModalSave" id="saveForm4" type="button" style="width: 98%;font-size: 26px;">Сохранить</button></div>
             </div>
         </div>
     </div>
@@ -295,6 +304,48 @@
 </div>
         </div>
 
+
+<!--Модалка на сохранение/изменение данных-->
+<div role="dialog" tabindex="-1" class="modal fade" id="modalUserSaveOrUpdateForm">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">БУДЬТЕ ВНИМАТЕЛЬНЫ</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 d-flex"><button class="btn btn-outline-danger btn-block btn-lg" id="buttonModalUpdateData" type="button">ОБНОВИТЬ ДАННЫЕ</button></div>
+                    <div class="col-6 d-flex"><button class="btn btn-success btn-block btn-lg" id="buttonModalOutAuto" type="button">ВЫЕЗД АВТОТРАНСПОРТА</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Работа с модалкой сохранить/изменить-->
+<script>
+    let NumberOpenSaveUpdateButton;
+    $('.openModalSave').click(function(){
+        NumberOpenSaveUpdateButton=+$(this).attr('id')[8];
+        if ($("tr").hasClass("marked")){
+            $('#modalUserSaveOrUpdateForm').modal('show');
+        } else{
+            saveFormTable(NumberOpenSaveUpdateButton);
+        }
+    });
+
+    $('#buttonModalOutAuto').click(function(){
+        saveFormTable(NumberOpenSaveUpdateButton);
+        $('#modalUserSaveOrUpdateForm').modal('hide');
+    });
+    $('#buttonModalUpdateData').click(function(){
+        // saveFormTable(NumberOpenSaveUpdateButton);
+        $('#modalUserSaveOrUpdateForm').modal('hide');
+    })
+</script>
+
+
+<script>
+
+</script>
 
 <style>
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
