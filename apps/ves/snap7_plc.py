@@ -64,7 +64,7 @@ class PlcRemoteUse():
         return ret
 
     def setBit(self,byte,bit):
-        bitsSet = [1,2,4,5,6,32,64,128]
+        bitsSet = [1,2,4,8,16,32,64,128]
         retVal = self.client.db_read(self.db_write, byte, 1)
         value = int.from_bytes(retVal[0:1], byteorder='big')
         ret = value | bitsSet[bit]
@@ -90,3 +90,32 @@ class PlcRemoteUse():
         val = struct.unpack('>f', value_db_tia[0:4])
         self.ves=val[0]/100
         return val[0]
+
+    def svetoforFromStreetOnScale(self):
+        '''с улицы на весы'''
+        self.setBit(0, 3)
+        self.resetBit(0, 4)
+        self.resetBit(0, 6)
+        self.resetBit(0, 7)
+
+    def svetoforFromScaleOnTerritory(self):
+        '''с весов на территорию'''
+        self.setBit(0, 7)
+        self.resetBit(0, 4)
+        self.resetBit(0, 6)
+        self.resetBit(0, 3)
+
+    def svetoforFromTerritoryOnScale(self):
+        '''с территории на весы'''
+        self.setBit(0, 4)
+        self.resetBit(0, 3)
+        self.resetBit(0, 6)
+        self.resetBit(0, 7)
+
+    def svetoforFromScaleOnStreet(self):
+        '''с весов на улицу'''
+        self.setBit(0, 6)
+        self.resetBit(0, 4)
+        self.resetBit(0, 3)
+        self.resetBit(0, 7)
+

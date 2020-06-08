@@ -162,7 +162,7 @@ class Auto(models.Model):
     datepriemsovmestny = models.DateField("дата совместной приемки ", null=True, blank=True)
 
     actNumber = models.CharField('act', max_length=255, null=True, db_index=True)
-    operatrion = models.IntegerField('operartion',null=True)
+    operatrion = models.CharField('operartion',null=True,max_length=255)
     typeOperation = models.CharField('тип операции', max_length=255, null=True, db_index=True)
     executer = models.CharField('исполнитель', max_length=255, null=True, db_index=True)
     numberAttorney = models.CharField('номер доверенности', max_length=255, null=True, db_index=True)
@@ -184,9 +184,13 @@ class Auto(models.Model):
     prinyal = models.CharField('кто принял', null=True, max_length=255, db_index=True)
     putlist = models.BigIntegerField('номер путевого листа', null=True, db_index=True)
     osnovanie = models.CharField('основание', max_length=255, null=True, db_index=True)
+    ves_prinyat = models.CharField('принятый вес', max_length=255, null=True, db_index=True)
     path1 = models.CharField('path1', max_length=255, null=True, db_index=True)
     path2 = models.CharField('path2', max_length=255, null=True, db_index=True)
     path3 = models.CharField('path3', max_length=255, null=True, db_index=True)
+    path4 = models.CharField('path4', max_length=255, null=True, db_index=True)
+    path5 = models.CharField('path5', max_length=255, null=True, db_index=True)
+    path6 = models.CharField('path6', max_length=255, null=True, db_index=True)
     def __str__(self):
         return self.number
     class Meta:
@@ -224,7 +228,7 @@ class Vagon(models.Model):
     courseDate = models.DateField("дата курса ", null=True, blank=True)
     nakladnayaDate = models.DateField("дата накладной ", null=True, blank=True)
 
-    operatrion = models.IntegerField('operartion', null=True)
+    operatrion = models.CharField('operartion',max_length =255 ,null=True)
     typeOperation = models.CharField('тип операции', max_length=255, null=True, db_index=True)
     executer = models.CharField('исполнитель', max_length=255, null=True, db_index=True)
     numberAttorney = models.CharField('номер доверенности', max_length=255, null=True, db_index=True)

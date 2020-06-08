@@ -180,7 +180,7 @@
 
           </div>
           <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-            <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal" onclick="">Да</button>
+            <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal" onclick="deleteContragent()">Да</button>
             <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">Нет</button>
           </div>
         </div>
@@ -262,7 +262,7 @@
 </script>
 
     <script>
-    var allAgents = '{{ agents }}';
+    var allAgents = '{{ agents|escapejs }}';
     allAgents = allAgents.replace(/&quot;/g,'"');
 
    // allAgents = allAgents.slice(0,-1);
@@ -296,11 +296,6 @@
         function addContragent() {
             let name = $("#contragentName").val();
             let unp = $("#unp").val();
-            {#let city = $("#city").val();#}
-            {#let typeOfCity = $("#np").val();#}
-            {#let street = $("#street").val();#}
-            {#let typeOfStreet = $("#typestreet").val();#}
-            {#let numHouse = $("#numH").val();#}
             let address = $("#addressContragentAdd").val();
             let description = $("#description").val();
             let payer = $("#payer").val();
@@ -340,7 +335,7 @@
                 }
             });
         }
-    let id_select;
+    var id_select;
 
         function updateAgent(e){
          id_select=e;
@@ -361,26 +356,6 @@
             if(!name){
                  addAction('оператор обновляя запись в список не указал название контрагента');
                 alert('Вы не ввели название контрагента'); $("#contragentName").focus(); return;
-            }
-            if(!unp){
-                 addAction('оператор обновляя запись в список не указал УНП контрагента');
-                alert('Вы не указали УНП контрагента'); $("#unp").focus(); return;
-            }
-            if(!address){
-                 addAction('оператор обновляя запись в список не указал адрес контрагента');
-                alert('Вы не указали адрес контрагента'); $("#unp").focus(); return;
-            }
-
-             if (!description) {
-                addAction('оператор обновляя запись в список не написал описание контрагента ');
-                if (!confirm('Вы не описание контрагента. Продолжить?')) {
-                    return;
-                }
-            }
-             if (!unp.match(/[0-9]{9}/)) {
-                alert("В поле УНП должны быть введены только 9 цифр");
-                $("#unp").focus();
-                return;
             }
 
              // post data to server
@@ -413,6 +388,34 @@
             });
         }
 
+
+
+
+           function deleteContragent() {
+
+             // post data to server
+             data = {
+                 "id":id_select,
+             };
+             $.ajax({
+                type: "POST",
+                url: '{% url 'deleteContragentView' %}',
+                data: data,
+                success: function () {
+                    addAction("Обновить контрагента");
+                    console.log('Load was performed.');
+                    document.location.reload(true);
+                },
+                 error: function(){
+                    document.location.reload(true);
+                 },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        }
     </script>
 
 

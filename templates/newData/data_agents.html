@@ -378,7 +378,7 @@
             });
         }
 
-    let id_select;
+    var id_select;
 
     function updateAgent(e){
          id_select=e;
@@ -423,7 +423,7 @@
                  "unp":unp,
                  "address":address,
                  "description":description,
-                 "id":id_select
+                 "id":id_select,
              };
              $.ajax({
                 type: "POST",

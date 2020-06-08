@@ -50,12 +50,22 @@ def n2tWeigth(dec):
                         end_text='кг')
 # ----------------------------------------------------------------------------------------------------------------------
 # вертикальный формат авто
-def invoiceBelcvetmet(path_to_SH, path_to_save, Data):
+def invoiceBelcvetmet(path_to_SH, path_to_save, Data,response):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
     # получаем рабочий лист (первый)
     _xls = xls.active
-    _xls['A16'] = Data['date']
+    # _xls['I2'] = Data['UNP01']
+
+    y = Data['date'][0:4]
+    m = Data['date'][5:7]
+    if m.isdigit():
+        mm = monat_to_ru[int(m)-1]
+    d = Data['date'][8:10]
+
+    _xls['N2'] = Data['unpGruzopoluchatel']
+
+    _xls['A16'] = d+' ' + mm+' '+y
     _xls['D17'] = Data['auto']
     _xls['P17'] = Data['trailer']
     _xls['Z17'] = Data['waybill']
@@ -63,12 +73,15 @@ def invoiceBelcvetmet(path_to_SH, path_to_save, Data):
     _xls['X19'] = Data['driver']
     # _xls['J21'] = Data['customer_transportation']
     # _xls['E23'] = Data['shipper']
-    # _xls['E25'] = Data['consignee']
+    _xls['E25'] = Data['consignee']
+    _xls['C62'] = Data['consignee']
     _xls['E27'] = Data['osnovanie_otpuska']
     # _xls['M27'] = Data['loading_point']
     _xls['W27'] = Data['unloading_point']
     # ТОВАРНЫЙ РАЗДЕЛ
+    _xls['A35'] = Data['name_tovar'] #наименование товара
     _xls['J35'] = Data['value']    # количество
+    _xls['H35'] = Data['value_name']  # единица измерения
     _xls['L35'] = Data['price']        # цена
     _xls['N35'] = Data['netto']       # стоимость
     _xls['P35'] = Data['vatSP']      # ставка НДС
@@ -84,8 +97,8 @@ def invoiceBelcvetmet(path_to_SH, path_to_save, Data):
     _xls['I61'] = Data['time_arrival']      # время прибытия
     _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
-def invoiceChermet(path_to_SH, path_to_save, Data):
+    xls.save(response)
+def invoiceChermet(path_to_SH, path_to_save, Data,response):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
     # получаем рабочий лист (первый)
@@ -119,8 +132,8 @@ def invoiceChermet(path_to_SH, path_to_save, Data):
     _xls['I61'] = Data['time_arrival']      # время прибытия
     _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
-def invoicePET(path_to_SH, path_to_save, Data):
+    xls.save(response)
+def invoicePET(path_to_SH, path_to_save, Data,response):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
     # получаем рабочий лист (первый)
@@ -154,9 +167,56 @@ def invoicePET(path_to_SH, path_to_save, Data):
     _xls['I61'] = Data['time_arrival']      # время прибытия
     _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
+    xls.save(response)
 # горизонтальный формат авто
-def invoiceBelcvetmetH(path_to_SH, path_to_save, Data):
+def invoiceBelcvetmetH(path_to_SH, path_to_save, Data,response):
+    # откроем шаблон
+    xls = load_workbook(filename=path_to_SH)
+    # sheets = xls.get_sheet_by_name('ТТН(книжн.) лиц.')
+    # получаем рабочий лист (первый)
+    _xls = xls.active
+    sh02 = xls['ТТН(книжн.) лиц.']
+    y = Data['date'][0:4]
+    m = Data['date'][5:7]
+    if m.isdigit():
+        mm = monat_to_ru[int(m)-1]
+    d = Data['date'][8:10]
+    sh02['B19'] = d + ' ' + mm + ' ' + y
+    #sh02['B19'] = Data['date'].day
+    #sh02['F19'] = monat_to_ru[Data['date'].month-1]
+    #sh02['X19'] = Data['date'].year - 2000
+
+    sh02['N21'] = Data['auto']
+    sh02['BK21'] = Data['trailer']
+    sh02['V24'] = Data['waybill']
+    # _xls['E19'] = Data['auto_owner'] # остается неизменным
+    sh02['K26'] = Data['driver']
+    # _xls['J21'] = Data['customer_transportation']
+    # _xls['E23'] = Data['shipper']
+    sh02['B51'] = Data['name_tovar']
+    sh02['U37'] = Data['osnovanie_otpuska']
+    # _xls['M27'] = Data['loading_point']
+    sh02['R40'] = Data['unloading_point']
+    # ТОВАРНЫЙ РАЗДЕЛ
+    sh02['AD51'] = Data['value']    # количество
+    sh02['AO51'] = Data['price']        # цена
+    sh02['AW51'] = Data['netto']       # стоимость
+    sh02['BG51'] = Data['vatSP']      # ставка НДС
+    sh02['BO51'] = Data['vat']        # сумма НДС
+    sh02['BW51'] = Data['brutto']       # стоимость с НДС
+    sh02['CG51'] = Data['value_place']  # колличество грузовых мест
+    sh02['CR51'] = Data['weight']       # массв груза
+    # цифры прописью
+    sh02['T54'] = n2t(Data['brutto'])
+    sh02['Y56'] = n2t(Data['vat'])
+    sh02['T59'] = n2tWeigth(Data['weight'])
+    # # погрузочно-разгрузочные работы
+    sh03 = xls['ТТН (книжн.) оборотн.']
+    sh03['AI8'] = Data['time_arrival']      # время прибытия
+    sh03['AP8'] = Data['time_depart']
+
+    xls.save(response)
+def invoiceChermetH(path_to_SH, path_to_save, Data,response):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
     # sheets = xls.get_sheet_by_name('ТТН(книжн.) лиц.')
@@ -196,8 +256,8 @@ def invoiceBelcvetmetH(path_to_SH, path_to_save, Data):
     sh03['AI8'] = Data['time_arrival']      # время прибытия
     sh03['AP8'] = Data['time_depart']
 
-    xls.save(path_to_save)
-def invoiceChermetH(path_to_SH, path_to_save, Data):
+    xls.save(response)
+def invoicePETH(path_to_SH, path_to_save, Data,response):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
     # sheets = xls.get_sheet_by_name('ТТН(книжн.) лиц.')
@@ -237,48 +297,7 @@ def invoiceChermetH(path_to_SH, path_to_save, Data):
     sh03['AI8'] = Data['time_arrival']      # время прибытия
     sh03['AP8'] = Data['time_depart']
 
-    xls.save(path_to_save)
-def invoicePETH(path_to_SH, path_to_save, Data):
-    # откроем шаблон
-    xls = load_workbook(filename=path_to_SH)
-    # sheets = xls.get_sheet_by_name('ТТН(книжн.) лиц.')
-    # получаем рабочий лист (первый)
-    _xls = xls.active
-    sh02 = xls['ТТН(книжн.) лиц.']
-    sh02['B19'] = Data['date'].day
-    sh02['F19'] = monat_to_ru[Data['date'].month-1]
-    sh02['X19'] = Data['date'].year - 2000
-
-    sh02['N21'] = Data['auto']
-    sh02['BK21'] = Data['trailer']
-    sh02['V24'] = Data['waybill']
-    # _xls['E19'] = Data['auto_owner'] # остается неизменным
-    sh02['K26'] = Data['driver']
-    # _xls['J21'] = Data['customer_transportation']
-    # _xls['E23'] = Data['shipper']
-    # _xls['E25'] = Data['consignee']
-    sh02['U37'] = Data['osnovanie_otpuska']
-    # _xls['M27'] = Data['loading_point']
-    sh02['R40'] = Data['unloading_point']
-    # ТОВАРНЫЙ РАЗДЕЛ
-    sh02['AD51'] = Data['value']    # количество
-    sh02['AO51'] = Data['price']        # цена
-    sh02['AW51'] = Data['netto']       # стоимость
-    sh02['BG51'] = Data['vatSP']      # ставка НДС
-    sh02['BO51'] = Data['vat']        # сумма НДС
-    sh02['BW51'] = Data['brutto']       # стоимость с НДС
-    sh02['CG51'] = Data['value_place']  # колличество грузовых мест
-    sh02['CR51'] = Data['weight']       # массв груза
-    # цифры прописью
-    sh02['T54'] = n2t(Data['brutto'])
-    sh02['Y56'] = n2t(Data['vat'])
-    sh02['T59'] = n2tWeigth(Data['weight'])
-    # # погрузочно-разгрузочные работы
-    sh03 = xls['ТТН (книжн.) оборотн.']
-    sh03['AI8'] = Data['time_arrival']      # время прибытия
-    sh03['AP8'] = Data['time_depart']
-
-    xls.save(path_to_save)
+    xls.save(response)
 # железнодорожные вагоны
 def invoiceZDotsev(path_to_SH, path_to_save, Data):
     # откроем шаблон
@@ -307,7 +326,7 @@ def invoiceZDotsev(path_to_SH, path_to_save, Data):
     # _xls['I61'] = Data['time_arrival']      # время прибытия
     # _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
+    xls.save(response)
 def invoiceZDstekloboiWHITE(path_to_SH, path_to_save, Data):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
@@ -330,7 +349,7 @@ def invoiceZDstekloboiWHITE(path_to_SH, path_to_save, Data):
     # _xls['I61'] = Data['time_arrival']      # время прибытия
     # _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
+    xls.save(response)
 def invoiceZDstekloboiGREEN(path_to_SH, path_to_save, Data):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
@@ -353,7 +372,7 @@ def invoiceZDstekloboiGREEN(path_to_SH, path_to_save, Data):
     # _xls['I61'] = Data['time_arrival']      # время прибытия
     # _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
+    xls.save(response)
 def invoiceZDstekloboiBROWN(path_to_SH, path_to_save, Data):
     # откроем шаблон
     xls = load_workbook(filename=path_to_SH)
@@ -376,13 +395,13 @@ def invoiceZDstekloboiBROWN(path_to_SH, path_to_save, Data):
     # _xls['I61'] = Data['time_arrival']      # время прибытия
     # _xls['K61'] = Data['time_depart']
 
-    xls.save(path_to_save)
+    xls.save(response)
 # ----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    path00 = 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_horizontal/Накладная Белцветмет.xlsx'
-    path01 = 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_horizontal/Накладная Чермет.xlsx'
-    path02 = 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_horizontal/ТТН Белвторресурсы ПЭТ.xlsx'
+    path00 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/cvetmet.xlsx'
+    path01 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/chermet.xlsx'
+    path02 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/pet.xlsx'
     path000= 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_vertical/Накл Цветмет верт.xlsx'
     path001 = 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_vertical/Накл Чермет верт.xlsx'
     path002 = 'C:/BELRESURS/python/print_form/invoice_template/auto/invoice_vertical/Накл ПЭТ верт.xlsx'

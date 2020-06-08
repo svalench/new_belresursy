@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from apps.ves.add_in_db import addAutoNew, addVagonNew,updateAutoNew, updateTrainNew
+from apps.ves.add_in_db import addAutoNew, addVagonNew,updateAutoNew, updateTrainNew , updateDDAutoNew
 from apps.ves.contract import showContract, AddContract, UpdContract, deleteContract
 from apps.ves.detectNumber import detectNumber
 from apps.ves.production import showProduction, AddProduction, UpdProduction, deleteProduction
 from apps.ves.responseblePerson import showPerson, AddPerson, UpdPerson, deletePerson
 from apps.ves.trailer import showTrailer, UpdTrailer, AddTrailer, deleteTrailer
 from apps.ves.addUser import  UpdUser, AddUserNew, deleteUser
-from apps.ves.docGeneration import actGenerate
+from apps.ves.docGeneration import actGenerate, nakladnaia_book,nakladnaia_vertical
 from ves_n.views import *
 
 from channels.routing import ProtocolTypeRouter
@@ -42,6 +42,7 @@ urlpatterns = [
     path('addvagonPOST/',addVagonPost, name='addVagonPOST'),
     path('addcontragentPOST/', addContragentView, name='addcontragentPOST'),
     path('updcontragentPOST/', updContragentView, name='updcontragentPOST'),
+    path('delete/agent/all', deleteContragentView, name='deleteContragentView'),
     path('getDataAuto/', GetDataAuto, name='getDataAuto'),
     path('getDataZd/', GetDataZd, name='getDataZd'),
     path('getDataStatus/', GetDataStatus, name='getDataStatus'),
@@ -60,6 +61,13 @@ urlpatterns = [
     path('add/train/new',addVagonNew,name='newAddVagon'),
     path('upd/train/data/new', updateTrainNew, name='updNewTrain'),
     path('detect/auto/number', detectNumber, name='detectNumber'),
+
+#обновления данных из подробнее
+    path('upd/data/moreinfo',updateDDAutoNew,name='updInfoMore'),
+
+# xls накладная горизонтальная
+    path('download/xls/gorizontal/',nakladnaia_book,name='xlsGenerateGorizontaly'),
+    path('download/xls/vert/',nakladnaia_vertical,name='xlsGenerateVert'),
 
     #данные бд контрагент
     path('data/catalogContract',showContract,name='catalogcontract'),

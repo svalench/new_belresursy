@@ -3,6 +3,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from apps.ves.models import Auto, ActionUser, Agent, Vagon
 from apps.ves.docGenerator import redactDocx
+from apps.ves.xlsGenerotor import *
 
 
 def actGenerate(request):
@@ -61,4 +62,98 @@ def actGenerate(request):
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     response['Content-Disposition'] = 'attachment; filename='+"_act__" + dt_string + '.docx'
     doc = redactDocx(path_to_shablon='/home/mvlab/belresusrs/templates/doc/template1.docx', path_to_save_docx='res001.docx', Data=data_act,response=response)
+    return response
+
+
+path00 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/cvetmet.xlsx'
+path01 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/chermet.xlsx'
+path02 = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_horizontal/pet.xlsx'
+path_vert = '/home/lex/PycharmProjects/new_bel/templates/doc/auto/invoice_vertical/gen.xlsx'
+def nakladnaia_book(request):
+    form = request.POST
+    form._mutable = True
+    print(form)
+    if (form['number_trailer'] == 'null'):
+        form['number_trailer'] = ""
+    dataInvoice = {
+        'unpGruzopoluchatel':form['unp'],
+        'date': form['CurrentDate'],  # дата
+        'auto': form['number'],  # автомобиль
+        'trailer':form['number_trailer'],  # прицеп
+        'waybill': form['NumberWayList'],  # путевой лист
+        'auto_owner': form['Contragent'],  # владелец автомобильной перевозки (плательщик)
+        'driver': form['driver'],  # водитель
+
+        'customer_transportation': '',  # заказчик автомобильной перевозки
+        'shipper': '',  # грузоотправитель
+        'consignee': form['Contragent'],  # грузополучатель
+        'osnovanie_otpuska': '',  # основание отпуска
+        'loading_point': '',  # пункт загрузки
+        'unloading_point': form['AddressOut'],  # пункт разгрузки
+
+        # ТОВАРНЫЙ РАЗДЕЛ
+        'name_tovar': form['NameTmc'],
+        'value_name': form['UnitWeight'],
+        'value': form['CellPhysicalWeight'],  # количество
+        'price': form['CellFirstPrice'],  # цена
+        'netto': form['CellSumWithoutNds'],  # стоимость
+        'vatSP': form['CellPercentNds'],  # ставка НДС
+        'vat': float(form['CellSumNds']),  # сумма НДС
+        'brutto': float(form['CellSumWithNds']),  # стоимость с НДС
+        'value_place': form['NumberLoadPlace'],  # колличество грузовых мест
+        'weight': float(form['CellPhysicalWeight']),  # массв груза
+
+        # ПОГРУЗОЧНО-РАЗГРУЗОЧНЫЕ РАБОТЫ
+        'time_arrival': form['last_in'].split(".")[0],  # время прибытия
+        'time_depart': form['last_out'].split(".")[0],  # время убытия
+    }
+    now = datetime.now()
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    response['Content-Disposition'] = 'attachment; filename='+"nakladnaya"+form['number']+ "_"+ dt_string + '.xlsx'
+    doc = invoiceBelcvetmet(path_to_SH=path00, path_to_save='res001.xlsx', Data=dataInvoice,response=response)
+    return response
+
+
+def nakladnaia_vertical(request):
+    form = request.POST
+    form._mutable = True
+    print(form)
+    dataInvoice = {
+        'unpGruzopoluchatel': form['unp'],
+        'date': form['CurrentDate'],  # дата
+        'auto': form['number'],  # автомобиль
+        'trailer': form['number_trailer'],  # прицеп
+        'waybill': form['NumberWayList'],  # путевой лист
+        'auto_owner': form['Contragent'],  # владелец автомобильной перевозки (плательщик)
+        'driver': form['driver'],  # водитель
+
+        'customer_transportation': '',  # заказчик автомобильной перевозки
+        'shipper': '',  # грузоотправитель
+        'consignee': form['Contragent'],  # грузополучатель
+        'osnovanie_otpuska': '',  # основание отпуска
+        'loading_point': '',  # пункт загрузки
+        'unloading_point': form['AddressOut'],  # пункт разгрузки
+
+        # ТОВАРНЫЙ РАЗДЕЛ
+        'name_tovar': form['NameTmc'],
+        'value_name': form['UnitWeight'],
+        'value': form['CellPhysicalWeight'],  # количество
+        'price': form['CellFirstPrice'],  # цена
+        'netto': form['CellSumWithoutNds'],  # стоимость
+        'vatSP': form['CellPercentNds'],  # ставка НДС
+        'vat': float(form['CellSumNds']),  # сумма НДС
+        'brutto': float(form['CellSumWithNds']),  # стоимость с НДС
+        'value_place': form['NumberLoadPlace'],  # колличество грузовых мест
+        'weight': float(form['CellPhysicalWeight']),  # массв груза
+
+        # ПОГРУЗОЧНО-РАЗГРУЗОЧНЫЕ РАБОТЫ
+        'time_arrival': form['last_in'].split(".")[0],  # время прибытия
+        'time_depart': form['last_out'].split(".")[0],  # время убытия
+    }
+    now = datetime.now()
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    response['Content-Disposition'] = 'attachment; filename='+"_act__" + dt_string + '.xlsx'
+    doc = invoiceBelcvetmetH(path_to_SH=path_vert, path_to_save='res001.xlsx', Data=dataInvoice,response=response)
     return response
