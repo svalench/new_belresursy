@@ -228,6 +228,10 @@ class Vagon(models.Model):
     courseDate = models.DateField("дата курса ", null=True, blank=True)
     nakladnayaDate = models.DateField("дата накладной ", null=True, blank=True)
 
+    dateotgruzka = models.DateField("дата отгнузки ", null=True, blank=True)
+    datepriem = models.DateField("дата приемки ", null=True, blank=True)
+    datepriemsovmestny = models.DateField("дата совместной приемки ", null=True, blank=True)
+    actNumber = models.CharField('act', max_length=255, null=True, db_index=True)
     operatrion = models.CharField('operartion',max_length =255 ,null=True)
     typeOperation = models.CharField('тип операции', max_length=255, null=True, db_index=True)
     executer = models.CharField('исполнитель', max_length=255, null=True, db_index=True)
