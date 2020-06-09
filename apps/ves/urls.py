@@ -39,10 +39,12 @@ urlpatterns = [
     path('data/catalog/auto',CatalogAutoView.showAuto,name='catalogAuto'),
     path('data/catalog/auto/addAuto',CatalogAutoView.addAuto,name='catalogAutoAdd'),
     path('data/catalog/auto/updAuto',CatalogAutoView.addUpdate,name='catalogAutoUpd'),
+    path('data/catalog/auto/catalogAutoDelete',CatalogAutoView.addAutoDel,name='catalogAutoDelete'),
 
     path('data/catalog/trailer',CatalogTrailerView.showTrailer,name='catalogTrailer'),
     path('data/catalog/trailer/addTrailer',CatalogTrailerView.addTrailer,name='catalogTrailerAdd'),
     path('data/catalog/trailer/updTrailer',CatalogTrailerView.addUpdate,name='catalogTrailerUpd'),
+    path('data/catalog/auto/catalogTrailerDelete', CatalogAutoView.addAutoDel, name='catalogTrailerDelete'),
 
     path('data/catalog/production', CatalogProductView.sowCatalog, name='catalogProduction'),
     path('data/catalog/production/addProduction', CatalogProductView.addProduction, name='catalogProductionAdd'),

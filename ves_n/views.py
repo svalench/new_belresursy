@@ -104,7 +104,6 @@ def updContragentView(request):
 def deleteContragentView(request):
     form = request.POST
     now = datetime.now()
-    address = form['address']
     agetnt = Agent.objects.get(id=form['id'])
     agetnt.delete()
     payload = {'success': True}

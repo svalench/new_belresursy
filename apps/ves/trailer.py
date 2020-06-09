@@ -17,6 +17,14 @@ def showTrailer(request):
 
 def AddTrailer(request):
     form = request.POST
+    form = request.POST
+    form._mutable = True
+    if (not 'agent' in form):
+        form['agent'] = None
+    if (not 'model' in form):
+        form['model'] = None
+    if not form['tara'].isnumeric():
+        form['tara'] = 0.0
     trailer = CatalogTrailer(number=form['number'], agent_id=form['agent'],model=form['model'],tara=form['tara'])
     trailer.save()
     payload = {'success': True}
@@ -25,6 +33,14 @@ def AddTrailer(request):
 
 def UpdTrailer(request):
     form = request.POST
+    form = request.POST
+    form._mutable = True
+    if (not 'agent' in form):
+        form['agent'] = None
+    if not form['tara'].isnumeric():
+        form['tara'] = 0.0
+    if (not 'model' in form):
+        form['model'] = None
     trailer = CatalogTrailer.objects.filter(id=form['id'])
     trailer.update(number=form['number'], agent_id=form['agent'],model=form['model'],tara=form['tara'])
     payload = {'success': True}

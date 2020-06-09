@@ -35,7 +35,7 @@ def UpdProduction(request):
 
 def deleteProduction(request):
     form = request.POST
-    trailer = CatalogTrailer.objects.filter(id=form['id'])
+    trailer = Production.objects.filter(id=form['id'])
     trailer.delete()
     payload = {'success': True}
     return HttpResponse(json.dumps(payload, indent=4, sort_keys=True, default=str), content_type='application/json')

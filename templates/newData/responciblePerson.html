@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
                                     <button type="button" class="btn btn-danger btnYesClass" id="btnYes"
-                                        data-dismiss="modal" onclick="">Да</button>
+                                        data-dismiss="modal" onclick="deletePers()">Да</button>
                                     <button type="button" class="btn btn-primary btnNoClass" id="btnNo"
                                         data-dismiss="modal">Нет</button>
                                 </div>
@@ -338,6 +338,43 @@ let super_id;
         $.ajax({
                 type: "POST",
                 url: '{% url 'personnUpd' %}',
+                traditional: true,
+                dataType: 'json',
+                data: data,
+                success: function (dat) {
+                    console.log("auto added");
+                      addAction('обновил отвественное лицо');
+                    document.location.reload(true);
+                },
+                error: function(){
+
+                 },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+    }
+
+
+
+        function deletePers () {
+            let role=$('#userProfessiaUpd').val();
+        let name = $('#userNameUpd').val();
+        let second_name = $("#userOtchestvoUpd").val();
+        let last = $("#userFamiliaUpd").val();
+        let data={
+            'role':role,
+            'first_name':name,
+            'second_name':second_name,
+            'last_name':last,
+            'id':super_id
+        };
+         console.log(data);
+        $.ajax({
+                type: "POST",
+                url: '{% url 'personDel' %}',
                 traditional: true,
                 dataType: 'json',
                 data: data,

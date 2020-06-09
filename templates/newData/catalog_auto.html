@@ -348,7 +348,7 @@ const clearFieldModalAdd = () => {
 
 
 
-{#САША ДОПИШИ УДАЛЕНИЕ, селекторы забирают все переменные выделенной строки#}
+
 function deleteAuto() {
         let id = $("tr + .tr-color-selected > td:eq(0)").text();
         let agent = $("tr + .tr-color-selected > td:eq(1)").text()
@@ -363,21 +363,21 @@ function deleteAuto() {
             'ves':ves
         };
         console.log(data);
-        {#$.ajax({#}
-        {#        type: "POST",#}
-        {#        url: '{% url 'ves:catalogAutoDelete' %}',#}
-        {#        traditional: true,#}
-        {#        dataType: 'json',#}
-        {#        data: data,#}
-        {#        success: function (dat) {#}
-        {#            console.log("auto update");#}
-        {#        },#}
-        {#        beforeSend: function (xhr, settings) {#}
-        {#            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {#}
-        {#                xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
-        {#            }#}
-        {#        }#}
-        {#    });#}
+        $.ajax({
+                type: "POST",
+                url: '{% url 'ves:catalogAutoDelete' %}',
+                traditional: true,
+                dataType: 'json',
+                data: data,
+                success: function (dat){
+                    console.log("auto update");
+                },
+                beforeSend: function (xhr, settings){
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+           });
     }
 
 

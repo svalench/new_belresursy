@@ -28,6 +28,13 @@ class CatalogAutoView(LoginRequiredMixin, CreateView):
     @login_required
     def addAuto(request):
         form =request.POST
+        form._mutable = True
+        if not 'agent' in form:
+            form['agent'] = None
+        if not form['ves'].isnumeric():
+            form['ves'] = 0.0
+        if not 'model' in form:
+            form['model'] = None
         auto = CatalogAuto(number=form['number'],agent_id=form['agent'],tara=form['ves'],model=form['model'])
         auto.save()
         payload = {'success': True}
@@ -36,10 +43,23 @@ class CatalogAutoView(LoginRequiredMixin, CreateView):
     @login_required
     def addUpdate(request):
         form = request.POST
+        form._mutable = True
+        if not 'agent' in form:
+            form['agent'] = None
+        if not form['ves'].isnumeric():
+            form['ves'] = 0.0
+        if not 'model' in form:
+            form['model'] = None
         auto = CatalogAuto.objects.filter(pk=request.POST['id']).update(number=form['number'],agent_id=form['agent'],tara=form['ves'],model=form['model'])
         payload = {'success': True}
         return HttpResponse(json.dumps(payload), content_type='application/json')
 
+    def addAutoDel(request):
+        form = request.POST
+        trailer = CatalogAuto.objects.filter(id=form['id'])
+        trailer.delete()
+        payload = {'success': True}
+        return HttpResponse(json.dumps(payload, indent=4, sort_keys=True, default=str), content_type='application/json')
 
 
 class CatalogTrailerView(LoginRequiredMixin, CreateView):
@@ -60,7 +80,16 @@ class CatalogTrailerView(LoginRequiredMixin, CreateView):
     @login_required
     def addTrailer(request):
         form = request.POST
-        auto = CatalogTrailer(number=form['number'], agent_id=form['agent'], tara=form['ves'], model=form['model'])
+        form._mutable = True
+        if (not 'agent' in form):
+            form['agent'] = None
+        if (not 'ves' in form):
+            form['ves'] = None
+        if (not 'model' in form):
+            form['model'] = None
+        if form['ves']=='':
+            form['ves']=0.0
+        auto = CatalogTrailer(number=form['number'], agent_id=int(form['agent']), tara=form['ves'], model=form['model'])
         auto.save()
         payload = {'success': True}
         return HttpResponse(json.dumps(payload), content_type='application/json')
@@ -68,6 +97,16 @@ class CatalogTrailerView(LoginRequiredMixin, CreateView):
     @login_required
     def addUpdate(request):
         form = request.POST
+        form._mutable = True
+        if (not 'agent' in form):
+            form['agent'] = None
+        if (not 'ves' in form):
+            form['ves'] = None
+        if (not 'model' in form):
+            form['model'] = None
+        if not form['ves'].isnumeric():
+            form['ves']=0.0
+        print(form)
         auto = CatalogTrailer.objects.filter(pk=request.POST['id']).update(number=form['number'], agent_id=form['agent'],
                                                                         tara=form['ves'], model=form['model'])
         payload = {'success': True}

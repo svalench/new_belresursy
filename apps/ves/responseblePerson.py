@@ -35,7 +35,7 @@ def UpdPerson(request):
 
 def deletePerson(request):
     form = request.POST
-    trailer = CatalogTrailer.objects.filter(id=form['id'])
+    trailer = CatalogResponsiblePerson.objects.filter(id=form['id'])
     trailer.delete()
     payload = {'success': True}
     return HttpResponse(json.dumps(payload, indent=4, sort_keys=True, default=str), content_type='application/json')
