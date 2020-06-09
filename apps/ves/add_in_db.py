@@ -419,8 +419,6 @@ def addVagonNew(request):
     allIn = Auto.objects.filter( status_in=True)
     all= vagonSql()
     allIn = serializers.serialize('json', allIn)
-    print("==================================================")
-    print(all[0])
     payload = {'success': True,'autoIn':allIn,"all":all}
 
     return HttpResponse(json.dumps(payload, indent=4, sort_keys=True, default=str), content_type='application/json')

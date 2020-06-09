@@ -266,7 +266,7 @@
 
 
 
-    let agents = "{{ agentsJ }}";
+    let agents = "{{ agentsJ|escapejs }}";
             agents = agents.replace(/&quot;/g,'"');
             agents = JSON.parse(agents);
         let tovar = "{{ production }}";
@@ -507,7 +507,7 @@ function tableAutoIn(){
 
 
 
-    let typeoperation_in_window = 1;
+    var typeoperation_in_window = 1;
     function show_serchAgent(a,agent) {
         typeoperation_in_window=a;
         if (agent == undefined) {
