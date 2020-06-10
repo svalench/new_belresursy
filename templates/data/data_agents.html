@@ -60,9 +60,9 @@
               <input type="text" id="description" class="form-control">
               <label data-error="измените" data-success="принято" for="description">Описание</label>
             </div>
-              <div class="md-form mb-5">
+              <div class="md-form mb-5" hidden>
               <input type="text" id="punktIn" class="form-control">
-              <label data-error="измените" data-success="принято" for="punktIn">пункт погрузки</label>
+              <label data-error="измените" data-success="принято" for="punktIn" >пункт погрузки</label>
             </div>
                <div class="md-form mb-5">
               <input type="text" id="payer" class="form-control">
@@ -130,9 +130,9 @@
               <input type="text" id="descriptionUpd" class="form-control">
               <label data-success="принято" for="descriptionUpd">Описание</label>
             </div>
-                <div class="md-form mb-5">
+                <div class="md-form mb-5" hidden>
               <input type="text" id="punktInUpd" class="form-control">
-              <label data-error="измените" data-success="принято" for="punktInUpd">пункт погрузки</label>
+              <label data-error="измените" data-success="принято" for="punktInUpd" >пункт погрузки</label>
             </div>
                <div class="md-form mb-5">
               <input type="text" id="payerUpd" class="form-control">
@@ -201,7 +201,6 @@
       <th class="th-sm">УНП</th>
         <th class="th-sm">Адрес</th>
 	  <th class="th-sm">Описание</th>
-        <th class="th-sm">Пункт разругки</th>
          <th class="th-sm">Плательщик</th>
       <th class="th-sm">Дата добавления</th>
         <th class="th-sm">Дата обновления</th>
@@ -216,7 +215,6 @@
       <td>{{ a.unp }}</td>
          <td>{{ a.address }}</td>
       <td>{{ a.description }}</td>
-        <td>{{ a.dischargePoint }}</td>
         <td>{{ a.payer }}</td>
       <td>{{ a.date_add }}</td>
         <td>{{ a.date_update }}</td>
@@ -232,7 +230,6 @@
       <th >УНП</th>
         <th >Адрес</th>
 	  <th >Описание</th>
-            <th >Пункт разругки</th>
          <th>Плательщик</th>
       <th >Дата добавления</th>
       <th >Дата обновления</th>

@@ -38,7 +38,7 @@
                                         <input type="text" class="form-control" hidden>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается характеристика ТМЦ">
                                         <input type="text" id="tmc" list="browsersAddTMC" class="form-control">
                                         <datalist id="browsersAddTMC">
                                             {% for i in tmc %}
@@ -46,10 +46,10 @@
                                                 {% endfor %}
                                         </datalist>
                                         <label data-error="измените" data-success="принято"
-                                            for="tmc">ТМЦ</label>
+                                            for="tmc">Характеристика ТМЦ</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается название контрагента">
                                          <input type="text" id="contragent" list="browsersAdd" class="form-control">
                                         <datalist id="browsersAdd">
                                             {% for i in agent %}
@@ -60,40 +60,54 @@
                                             for="contragent">Контрагент</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается номер договора">
                                         <input type="text" id="nameContract" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="nameContract">Наименование договора</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается дата договора">
                                         <input type="date" id="date" class="form-control">
-                                        <label data-error="измените" data-success="принято" for="date">Дата договора</label>
+                                        <label data-error="измените" data-success="принято" for="date" class="active">Дата договора</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
-                                        <input type="text" id="typeOperation" class="form-control">
-                                        <label data-error="измените" data-success="принято" for="typeOperation">Тип операции</label>
-                                    </div>
+<!--                                    <div class="md-form mb-5">-->
+<!--                                        <input type="text" id="typeOperation" class="form-control">-->
+<!--                                        <label data-error="измените" data-success="принято" for="typeOperation">Тип операции</label>-->
+<!--                                    </div>-->
 
-                                    <div class="md-form mb-5">
-                                        <input type="text" id="viewComing" class="form-control">
+                                    <div class="md-form mb-5" title="Необязательно- указывается только у приемки">
+                                        <input type="text" id="viewComing" class="form-control" list="listViewComingAdd">
+                                        <datalist id="listViewComingAdd">
+                                            <option  value="от отходов потребления">
+                                            <option  value="от отходов производства">
+                                        </datalist>
+
                                         <label data-error="измените" data-success="принято"
                                             for="viewComing">Вид прихода</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Необязательно- указывается только у отгрузок стекла, металлов, ПЭТ">
                                         <input type="text" id="salesAccount" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="salesAccount">Счет реализации</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
-                                        <input type="text" id="firstPrice" class="form-control">
+                                    <div class="md-form mb-5" title="Обязательно - указывается цена за единицу измерения веса">
+                                        <input type="text" id="firstPrice" class="form-control" >
                                         <label data-error="измените" data-success="принято"
                                             for="firstPrice">Первичная цена</label>
                                     </div>
-                                     <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается единица измерения веса">
+                                         <input type="text" id="unitWeightAdd" list="weightBrowseAdd" class="form-control">
+                                        <datalist id="weightBrowseAdd">
+                                            <option  value="кг">
+                                            <option  value="тн">
+                                        </datalist>
+                                        <label data-error="измените" data-success="принято"
+                                            for="valuta">Единицы измерения веса</label>
+                                    </div>
+                                     <div class="md-form mb-5" title="Обязательно- указывается валюта договора">
                                          <input type="text" id="valuta" list="valutaBrowseAdd" class="form-control">
                                         <datalist id="valutaBrowseAdd">
                                             <option  value="USD">
@@ -102,7 +116,7 @@
                                             <option  value="RUR">
                                         </datalist>
                                         <label data-error="измените" data-success="принято"
-                                            for="valuta">Влюта</label>
+                                            for="valuta">Валюта</label>
                                     </div>
                                     <input type="text" class="form-control" hidden>
                                     <input type="text" class="form-control" hidden>
@@ -141,7 +155,7 @@
                                         <input type="text" class="form-control" hidden>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается характеристика ТМЦ">
                                         <input type="text" id="tmcUpd" list="browsersAddTMCUpd" class="form-control">
                                         <datalist id="browsersAddTMCUpd">
                                             {% for i in tmc %}
@@ -149,10 +163,10 @@
                                                 {% endfor %}
                                         </datalist>
                                         <label data-error="измените" data-success="принято"
-                                            for="tmcUpd">ТМЦ</label>
+                                            for="tmcUpd">Характеристика ТМЦ</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается название контрагента">
                                          <input type="text" id="contragentUpd" list="browsersAddUpd" class="form-control">
                                         <datalist id="browsersAddUpd">
                                             {% for i in agent %}
@@ -163,41 +177,53 @@
                                             for="contragentUpd">Контрагент</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается номер договора">
                                         <input type="text" id="nameContractUpd" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="nameContractUpd">Наименование договора</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается дата договора">
                                         <input type="date" id="dateUpd" class="form-control">
-                                        <label data-error="измените" data-success="принято" for="dateUpd">Дата договора</label>
+                                        <label data-error="измените" data-success="принято" for="dateUpd" class="active">Дата договора</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
-                                        <input type="text" id="typeOperationUpd" class="form-control">
-                                        <label data-error="измените" data-success="принято" for="typeOperationUpd">Тип операции</label>
-                                    </div>
+<!--                                    <div class="md-form mb-5">-->
+<!--                                        <input type="text" id="typeOperationUpd" class="form-control">-->
+<!--                                        <label data-error="измените" data-success="принято" for="typeOperationUpd">Тип операции</label>-->
+<!--                                    </div>-->
 
-                                    <div class="md-form mb-5">
-                                        <input type="text" id="viewComingUpd" class="form-control">
+                                    <div class="md-form mb-5" title="Необязательно- указывается только у приемки">
+                                        <input type="text" id="viewComingUpd" class="form-control" list="listViewComingUpd">
+                                        <datalist id="listViewComingUpd">
+                                            <option  value="от отходов потребления">
+                                            <option  value="от отходов производства">
+                                        </datalist>
                                         <label data-error="измените" data-success="принято"
                                             for="viewComingUpd">Вид прихода</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Необязательно- указывается только у отгрузок стекла, металлов, ПЭТ">
                                         <input type="text" id="salesAccountUpd" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="salesAccountUpd">Счет реализации</label>
                                     </div>
 
-                                    <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно - указывается цена за единицу измерения веса">
                                         <input type="text" id="firstPriceUpd" class="form-control">
                                         <label data-error="измените" data-success="принято"
                                             for="firstPriceUpd">Первичная цена</label>
                                     </div>
-
-                                 <div class="md-form mb-5">
+                                    <div class="md-form mb-5" title="Обязательно- указывается единица измерения веса">
+                                         <input type="text" id="unitWeightUpd" list="weightBrowseUpd" class="form-control">
+                                        <datalist id="weightBrowseUpd">
+                                            <option  value="кг">
+                                            <option  value="тн">
+                                        </datalist>
+                                        <label data-error="измените" data-success="принято"
+                                            for="valuta">Единицы измерения веса</label>
+                                    </div>
+                                 <div class="md-form mb-5" title="Обязательно- указывается валюта договора">
                                          <input type="text" id="valutaUpd" list="valutaBrowse" class="form-control">
                                         <datalist id="valutaBrowse">
                                             <option  value="USD">
@@ -206,7 +232,7 @@
                                             <option  value="RUR">
                                         </datalist>
                                         <label data-error="измените" data-success="принято"
-                                            for="valutaUpd">Влюта</label>
+                                            for="valutaUpd">Валюта</label>
                                     </div>
 
                                     <input type="text" class="form-control" hidden>
@@ -274,6 +300,7 @@
                             <th class="th-sm">Вид прихода</th>
                             <th class="th-sm">Счет реализации</th>
                             <th class="th-sm">Первичная цена</th>
+                            <th class="th-sm">Единица измерения</th>
                             <th class="th-sm">Валюта</th>
                             <th class="th-sm">Дата добавления</th>
                             <th class="th-sm">Дата обновления</th>
@@ -281,15 +308,16 @@
                     </thead>
                     <tbody>
                         {% for a in contract %}
-                        <tr onclick="get_date('{{ a.datecontract|date:"Y-m-d" }}',{{ a.id }})">
+                        <tr onclick="get_date('{{ a.date|date:"Y-m-d" }}',{{ a.id }})">
                             <td>{{ a.id }}</td>
-                            <td>{{ a.parentmaterialid.name }}</td>
+                            <td>{{ a.parentMaterialId.name }}</td>
                             <td>{{ a.parentContragentId.name }}</td>
                             <td>{{ a.name }}</td>
-                            <td>{{ a.datecontract }}</td>
+                            <td>{{ a.date }}</td>
                             <td>{{ a.typeOfOperation }}</td>
                             <td>{{ a.typeOfArrival }}</td>
                             <td>{{ a.salesAccount }}</td>
+                            <td>{{ a.firstPrice }}</td>
                             <td>{{ a.firstPrice }}</td>
                             <td>{{ a.unitPrice }}</td>
                             <td>{{ a.date_add }}</td>
@@ -310,6 +338,7 @@
                             <th>Вид прихода</th>
                             <th>Счет реализации</th>
                             <th>Первичная цена</th>
+                            <th>Единица измерения</th>
                             <th>Валюта</th>
                             <th>Дата добавления</th>
                             <th>Дата обновления</th>

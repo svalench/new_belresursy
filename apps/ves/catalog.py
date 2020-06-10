@@ -22,6 +22,12 @@ class CatalogAutoView(LoginRequiredMixin, CreateView):
     def showAuto(request):
         auto = CatalogAuto.objects.all()
         agent = Agent.objects.all()
+        for i in auto:
+            a = i.number.split("-")
+            if len(a)>1:
+                i.num = a[0]
+                i.seria = a[1]
+                i.region = a[2]
         data = {'agent':agent,'auto':auto}
         return render(request, 'data/catalog_auto.html',data)
 
