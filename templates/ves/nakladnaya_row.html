@@ -328,16 +328,16 @@
         if ($("tr").hasClass("marked")){
             $('#modalUserSaveOrUpdateForm').modal('show');
         } else{
-            saveFormTable(NumberOpenSaveUpdateButton);
+            saveFormTable(NumberOpenSaveUpdateButton,"{%url 'newAddAuto'%}");
         }
     });
 
     $('#buttonModalOutAuto').click(function(){
-        saveFormTable(NumberOpenSaveUpdateButton);
+        saveFormTable(NumberOpenSaveUpdateButton,"{%url 'newAddAuto'%}");
         $('#modalUserSaveOrUpdateForm').modal('hide');
     });
     $('#buttonModalUpdateData').click(function(){
-        // saveFormTable(NumberOpenSaveUpdateButton);
+         saveFormTable(NumberOpenSaveUpdateButton,"{%url 'updNewAuto'%}");
         $('#modalUserSaveOrUpdateForm').modal('hide');
     })
 </script>
@@ -450,7 +450,7 @@
     }
 
     {#при нажатии кнопки сохранить получаем id всех полей указанной формы#}
-    const saveFormTable=(number)=>{
+    const saveFormTable=(number,url)=>{
         let idFieldText,idFieldSelect;
         switch (+number){
             case 1:
@@ -491,8 +491,7 @@
         res.gos_num_pricep=$("#gos_num_pricep").val();
         res.operation = +number;
         res.ves=$("#vesFix").html();
-        console.log(res);
-        save(res);
+        save(res,url);
 
 
     }
@@ -501,19 +500,10 @@
 
 
 
-    function save(data) {
+    function save(data,url) {
 
     if(!confirm("Вы увеерны что хотите соxранить данные")){return;}
-    let url;
-     if(global_status_replace_right) {
-         if (confirm("Нажава ОК вы укажете что авто покинуло территорию. Нажав Cancel Вы обновите данные")) {
-             url = "{%url 'newAddAuto'%}";
-         } else {
-             url = "{%url 'updNewAuto'%}";
-         }
-     }else{
-         url = "{%url 'newAddAuto'%}";
-     }
+
     $.ajax({
             type: "POST",
             url:  url ,

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Камеры{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="pb-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"><img id="img1" src={% static "camera/cam1.jpg"  %} /></div>
+            <div class="col-md-4"><img id="img2" src={% static "camera/cam2.jpg"  %} /></div>
+            <div class="col-md-4"><img id="img3" src={% static "camera/cam3.jpg"  %} /></div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"><img id="img4" src={% static "camera/cam4.jpg"  %} /></div>
+            <div class="col-md-4"><img id="img5" src={% static "camera/cam5.jpg"  %} /></div>
+            <div class="col-md-4"><img id="img6" src={% static "camera/cam6.jpg"  %} /></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    img{
+        width: 96%;
+    }
+</style>
+
+<script>
+function upd_cam(){
+let cam1= document.getElementById('cam1'),
+    cam2= document.getElementById('cam2'),
+    cam3= document.getElementById('cam3'),
+    cam4= document.getElementById('cam4'),
+    cam5= document.getElementById('cam5'),
+    cam6= document.getElementById('cam6');
+
+cam1.src = '/static/camera/cam1.jpg?'+Math.random();
+cam2.src = '/static/camera/cam2.jpg?'+Math.random();
+cam3.src = '/static/camera/cam3.jpg?'+Math.random();
+cam4.src = '/static/camera/cam4.jpg?'+Math.random();
+cam5.src = '/static/camera/cam5.jpg?'+Math.random();
+cam6.src = '/static/camera/cam6.jpg?'+Math.random();
+}
+setInterval(upd_cam,1000);
+</script>
+
+{%endblock%}

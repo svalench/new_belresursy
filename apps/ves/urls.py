@@ -34,6 +34,7 @@ urlpatterns = [
     path('data/actions',  DataView.ActionView, name = 'actions'),
     path('ves/users', DataView.UserView, name='users'),
     path('ves/users/<int:usid>/', DataView.updateUserView, name='usersUpd'),
+    path('ves/cameras/', DataView.camers, name='camers'),
 
     #catalog views
     path('data/catalog/auto',CatalogAutoView.showAuto,name='catalogAuto'),

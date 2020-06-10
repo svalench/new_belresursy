@@ -160,29 +160,29 @@ function replaceRight(num){
                 $("#p2ButtonClearForm").trigger('click');
                 $("#p3ButtonClearForm").trigger('click');
                 $("#p4ButtonClearForm").trigger('click');
-    chooseTabs(actual.operatrion);
+    chooseTabs(actual.type_operation_modal);
     $("#gos_num_avto").val(actual.number);
     $("#gos_num_pricep").val(actual.numberPricep);
-    $("#p"+actual.operatrion+"Contragent").val(actual.nameagent);
-    $("#p"+actual.operatrion+"Contragent").attr('data-id',actual.agents_id);
-    $("#p"+actual.operatrion+"DateInvoice").val(actual.nakladnayaDate);
-    $("#p"+actual.operatrion+"SeriesInvoice").val(actual.seria);
-    $("#p"+actual.operatrion+"NumberInvoice").val(actual.numberNakladnaia);
-    $("#p"+actual.operatrion+"NameDriver").val(actual.driver);
-    $("#p"+actual.operatrion+"Description").val(actual.description);
-    $("#p"+actual.operatrion+"Contract").val(actual.contractname);
-    $("#p"+actual.operatrion+"Contract").attr('data-id',actual.contractid);
-    $("#p"+actual.operatrion+"TypeInvoice").val();
-    $("#p"+actual.operatrion+"UnitContractPrice").val(actual.unitPrice);
-    $("#p"+actual.operatrion+"ContractPrice").val(actual.firstPrice);
-    $("#p"+actual.operatrion+"NdsPercent").val(actual.nds);
-    $("#p"+actual.operatrion+"WeightInvoice").val(actual.ves_nakladnaya);
-    $("#p"+actual.operatrion+"DirtPercent").val(actual.discont);
-    $("#p"+actual.operatrion+"TypeInvoice").val(actual.type);
-    $("#p"+actual.operatrion+"TypeArrival").val(actual.typeOperation);
-    $("#p"+actual.operatrion+"TypeMaterialOut").val(actual.typeMaterial);
-    $("#p"+actual.operatrion+"NumberAccompanyingPassport").val(actual.numberPasport);
-    $("#p"+actual.operatrion+"NumberWayList").val(actual.numberPassportList);
+    $("#p"+actual.type_operation_modal+"Contragent").val(actual.nameagent);
+    $("#p"+actual.type_operation_modal+"Contragent").attr('data-id',actual.agents_id);
+    $("#p"+actual.type_operation_modal+"DateInvoice").val(actual.nakladnayaDate);
+    $("#p"+actual.type_operation_modal+"SeriesInvoice").val(actual.seria);
+    $("#p"+actual.type_operation_modal+"NumberInvoice").val(actual.numberNakladnaia);
+    $("#p"+actual.type_operation_modal+"NameDriver").val(actual.driver);
+    $("#p"+actual.type_operation_modal+"Description").val(actual.description);
+    $("#p"+actual.type_operation_modal+"Contract").val(actual.contractname);
+    $("#p"+actual.type_operation_modal+"Contract").attr('data-id',actual.contractid);
+    $("#p"+actual.type_operation_modal+"TypeInvoice").val();
+    $("#p"+actual.type_operation_modal+"UnitContractPrice").val(actual.unitPrice);
+    $("#p"+actual.type_operation_modal+"ContractPrice").val(actual.firstPrice);
+    $("#p"+actual.type_operation_modal+"NdsPercent").val(actual.nds);
+    $("#p"+actual.type_operation_modal+"WeightInvoice").val(actual.ves_nakladnaya);
+    $("#p"+actual.type_operation_modal+"DirtPercent").val(actual.discont);
+    $("#p"+actual.type_operation_modal+"TypeInvoice").val(actual.type);
+    $("#p"+actual.type_operation_modal+"TypeArrival").val(actual.typeOperation);
+    $("#p"+actual.type_operation_modal+"TypeMaterialOut").val(actual.typeMaterial);
+    $("#p"+actual.type_operation_modal+"NumberAccompanyingPassport").val(actual.numberPasport);
+    $("#p"+actual.type_operation_modal+"NumberWayList").val(actual.numberPassportList);
     $(".btn-menu").trigger('click');
 }
 
@@ -514,7 +514,7 @@ function tableAutoIn(){
     auto_in.forEach(function(a,b){
         ready+=`<tr>
                 <td>${a.number}</td>
-                <td>${a.operatrion}</td>
+                <td>${a.type_operation_modal}</td>
                 <td>${a.nameagent}</td>
                 <td>Cell 3</td>
                 <td>${a.last_in}</td>

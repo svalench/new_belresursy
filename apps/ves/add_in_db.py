@@ -120,7 +120,7 @@ def updateAutoNew(request):
                   description=form['Description'], seria=form['SeriesInvoice'], numberNakladnaia=form['NumberInvoice'],
                   nakladnayaDate=form['DateInvoice'],
                   ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont=form['DirtPercent'],
-                  weghtOut=float(form['ves']), parentuserid_id=request.user.id, operatrion=form['operation'],
+                  weghtOut=float(form['ves']), parentuserid_id=request.user.id, type_operation_modal=form['operation'],
                   type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed=form['UnitWeight'],
                   typeOperation=form['TypeArrival'], courseDate=form['courseDate'],
                   typeMaterial=form['TypeMaterialOut'], numberPasport=form['NumberAccompanyingPassport'],
@@ -194,11 +194,11 @@ def addAutoNew(request):
                     number_pricep=form['gos_num_pricep'],  last_out=last_in, catalog_id=form['DataAuto'], catalogpricep=form['DataTrailer'],
                     description= form['Description'], seria=form['SeriesInvoice'],numberNakladnaia=form['NumberInvoice'], nakladnayaDate = form['DateInvoice'],
                     ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont= form['DirtPercent'],
-                     weghtOut=float(form['ves']), parentuserid_id=request.user.id,operatrion = form['operation'],
+                     weghtOut=float(form['ves']), parentuserid_id=request.user.id,type_operation_modal = form['operation'],
                     type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed= form['UnitWeight'], typeOperation= form['TypeArrival'],
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=False)
-        svetoforFromScaleOnStreet(request)
+        #svetoforFromScaleOnStreet(request)
     else:
         if(not 'WeightInvoice' in form):
             form['WeightInvoice']=None
@@ -242,12 +242,12 @@ def addAutoNew(request):
                     number_pricep=form['gos_num_pricep'],  last_in=last_in, catalog_id=form['DataAuto'], catalogpricep=form['DataTrailer'],
                     description= form['Description'], seria=form['SeriesInvoice'],numberNakladnaia=form['NumberInvoice'], nakladnayaDate = form['DateInvoice'],
                     ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont= form['DirtPercent'],
-                     weghtIn=float(form['ves']), parentuserid_id=request.user.id,operatrion = form['operation'],
+                     weghtIn=float(form['ves']), parentuserid_id=request.user.id,type_operation_modal = form['operation'],
                     type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed= form['UnitWeight'], typeOperation= form['TypeArrival'],
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=True)
         auto.save()
-        svetoforFromScaleOnTerritory(request)
+        #svetoforFromScaleOnTerritory(request)
     allIn = Auto.objects.filter( status_in=True)
     all= my_custom_sql()
     allIn = serializers.serialize('json', allIn)
@@ -371,7 +371,7 @@ def addVagonNew(request):
         in_ter.update(number=form['gos_num_avto'], agent_vagon_id=form['Contragent'],    last_out=last_in, parentcontractid_id=form['Contract'],
                     description= form['Description'], seria=form['SeriesInvoice'],numberNakladnaia=form['NumberInvoice'], nakladnayaDate = form['DateInvoice'],
                     ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont= form['DirtPercent'],
-                     weghtOut=float(form['ves']),netto=abs(in_ter[0].weghtIn-int(form['ves'])), parentuserid_id=request.user.id,operatrion = form['operation'],
+                     weghtOut=float(form['ves']),netto=abs(in_ter[0].weghtIn-int(form['ves'])), parentuserid_id=request.user.id,type_operation_modal = form['operation'],
                     type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed= form['UnitWeight'], typeOperation= form['TypeArrival'],
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=False)
@@ -411,7 +411,7 @@ def addVagonNew(request):
         auto = Vagon(number=form['gos_num_avto'], agent_vagon_id=form['Contragent'],    last_in=last_in, parentcontractid_id=form['Contract'],
                     description= form['Description'], seria=form['SeriesInvoice'],numberNakladnaia=form['NumberInvoice'], nakladnayaDate = form['DateInvoice'],
                     ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont= form['DirtPercent'],
-                     weghtIn=float(form['ves']), parentuserid_id=request.user.id,operatrion = form['operation'],
+                     weghtIn=float(form['ves']), parentuserid_id=request.user.id,type_operation_modal = form['operation'],
                     type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed= form['UnitWeight'], typeOperation= form['TypeArrival'],
                     typeMaterial= form['TypeMaterialOut'], numberPasport= form['NumberAccompanyingPassport'], numberPassportList = form['NumberWayList'],
                 status_in=True)
@@ -471,7 +471,7 @@ def updateTrainNew(request):
                   nakladnayaDate=form['DateInvoice'],
                   ves_nakladnaya=form['WeightInvoice'], price_ed_iz=form['ContractPrice'], discont=form['DirtPercent'],
                   weghtOut=float(form['ves']),
-                  parentuserid_id=request.user.id, operatrion=form['operation'],
+                  parentuserid_id=request.user.id, type_operation_modal=form['operation'],
                   type=form['TypeInvoice'], nds=form['NdsPercent'], ves_ed=form['UnitWeight'],
                   typeOperation=form['TypeArrival'],
                   typeMaterial=form['TypeMaterialOut'], numberPasport=form['NumberAccompanyingPassport'],

@@ -126,7 +126,8 @@ class StartView(LoginRequiredMixin, CreateView):
 class DataView(LoginRequiredMixin, CreateView):
     template_name = 'ves/start.html'
     login_url = '/accounts/login/'
-
+    def camers(request):
+        return render(request, 'newData/camerapage.html')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context

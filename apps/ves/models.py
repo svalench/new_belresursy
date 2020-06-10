@@ -138,7 +138,7 @@ class Auto(models.Model):
                                          db_index=True)
 
 
-
+    type_operation_modal = models.CharField('operartion type in window',null=True,max_length=255)
     number = models.CharField('Номер', max_length=255, db_index=True)
     driver = models.CharField('Водитель', max_length=255,null=True ,db_index=True)
     number_pricep =  models.CharField('номер прицепа', max_length=255,null=True, db_index=True)
@@ -209,7 +209,7 @@ class Vagon(models.Model):
                                          db_index=True)
     parentcontractid = models.ForeignKey(CatalogContract, on_delete=models.CASCADE, null=True, blank=True,
                                          db_index=True)
-
+    type_operation_modal = models.CharField('operartion type in window',null=True,max_length=255)
     number = models.CharField('Номер', max_length=255, db_index=True)
     nakladnaya = models.CharField('Накладная', max_length=255, default=0, db_index=True)
     date_add = models.DateTimeField(auto_now_add=True, db_index=True)

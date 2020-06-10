@@ -1,6 +1,6 @@
-body, h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
-}
+/*body, h1, h2, h3, h4, h5, h6 {*/
+/*  font-weight: 300;*/
+/*}*/
 
 .divider-new, .navbar .nav-flex-icons {
   -webkit-box-orient: horizontal;
@@ -6863,7 +6863,7 @@ a.waves-effect, a.waves-light {
   padding: .3rem 0 0 1rem;
   background-color: inherit;
   font-size: 15px;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar .breadcrumb .breadcrumb-item {
@@ -6925,7 +6925,7 @@ a.waves-effect, a.waves-light {
 .navbar .dropdown-menu a {
   padding: 10px;
   font-size: .9375rem;
-  font-weight: 300;
+  /*font-weight: 300;*/
   color: #000;
 }
 
@@ -6973,17 +6973,17 @@ a.waves-effect, a.waves-light {
 
 .navbar.navbar-light form .md-form .form-control::-webkit-input-placeholder {
   color: #000;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar.navbar-light form .md-form .form-control::-ms-input-placeholder {
   color: #000;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar.navbar-light form .md-form .form-control::placeholder {
   color: #000;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled, .navbar.navbar-dark .navbar-nav .nav-item .nav-link.disbled:hover {
@@ -7024,17 +7024,17 @@ a.waves-effect, a.waves-light {
 
 .navbar.navbar-dark form .md-form .form-control::-webkit-input-placeholder {
   color: #fff;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar.navbar-dark form .md-form .form-control::-ms-input-placeholder {
   color: #fff;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 .navbar.navbar-dark form .md-form .form-control::placeholder {
   color: #fff;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 @media (min-width:600px) {
